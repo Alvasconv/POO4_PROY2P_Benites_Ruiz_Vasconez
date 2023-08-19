@@ -1,0 +1,6 @@
+.root{
+    -fx-background-image: url("Helados.jpg");
+    -fx-background-size:600px 400px;
+    /*-fx-background-repeat: no-repeat;*/
+    /*-fx-background-position: center center;*/
+}
