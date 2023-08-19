@@ -10,4 +10,3 @@ Sirope de caramelo,1.30
 Galletas trituradas,1.20
 Kiwi en rodajas,1.80
 Coco rallado,0.90
-Salsa de frambuesa,1.40

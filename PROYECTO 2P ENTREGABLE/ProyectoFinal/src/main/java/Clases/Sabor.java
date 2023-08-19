@@ -17,7 +17,7 @@ public class Sabor {
         this.precio = precio;
     }
 
-    public String getBase() {
+    public String getSabor() {
         return sabor;
     }
 
@@ -27,7 +27,11 @@ public class Sabor {
 
     @Override
     public String toString() {
-        return sabor + "precio = " + precio;
+        return sabor;
+    }
+    
+    public String mostrarDetalles() {
+        return sabor+" - "+precio;
     }
     
 }

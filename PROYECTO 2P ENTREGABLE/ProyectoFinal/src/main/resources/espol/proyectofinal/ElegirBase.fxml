@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espol.proyectofinal.ElegirBaseController">
+    <stylesheets>
+        <URL value="@elegirbase.css" />
+    </stylesheets>
+   <children>
+      <Label layoutX="55.0" layoutY="349.0" text="Valor a pagar:" />
+      <Button fx:id="btnContinuar" layoutX="562.0" layoutY="330.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="90.0" text="Continuar" />
+      <Label layoutX="36.0" layoutY="33.0" prefHeight="31.0" prefWidth="148.0" text="PASO1: Elija una base" />
+      <Label fx:id="costoBase1" alignment="CENTER" layoutX="110.0" layoutY="246.0" prefHeight="31.0" prefWidth="38.0" text="12" />
+      <Label fx:id="costoBase2" alignment="CENTER" layoutX="316.0" layoutY="246.0" prefHeight="31.0" prefWidth="48.0" text="20" />
+      <Label fx:id="costoBase3" alignment="CENTER" contentDisplay="CENTER" layoutX="530.0" layoutY="246.0" prefHeight="31.0" prefWidth="38.0" text="10" />
+      <Label fx:id="costoTotal" layoutX="146.0" layoutY="349.0" text="0" />
+      <ToggleButton fx:id="base1" layoutX="33.0" layoutY="88.0" mnemonicParsing="false" prefHeight="150.0" prefWidth="200.0" text="helado5">
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+         <graphic>
+            <ImageView fx:id="imgBase1" fitHeight="100.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </ToggleButton>
+      <ToggleButton fx:id="base2" layoutX="240.0" layoutY="88.0" mnemonicParsing="false" prefHeight="150.0" prefWidth="200.0" text="helado4">
+         <graphic>
+            <ImageView fx:id="imgBase2" fitHeight="100.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </ToggleButton>
+      <Label fx:id="mensajeException" layoutX="285.0" layoutY="349.0" />
+      <ToggleButton fx:id="base3" layoutX="449.0" layoutY="88.0" mnemonicParsing="false" prefHeight="150.0" prefWidth="200.0" text="helado4">
+         <graphic>
+            <ImageView fx:id="imgBase3" fitHeight="100.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </ToggleButton>
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</AnchorPane>

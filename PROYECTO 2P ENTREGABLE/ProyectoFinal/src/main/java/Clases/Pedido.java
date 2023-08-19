@@ -13,18 +13,40 @@ import java.util.ArrayList;
 public class Pedido {
     private int pedido;
     private Base base;
-    private ArrayList<Sabor> sabor;
-    private ArrayList<Topping> topping;
-    private int total;
+    private ArrayList<Sabor> sabores;
+    private ArrayList<Topping> toppings;
+    private double total;
     private String nombre;
+    private static int pedidoNum = 1;
 
-    public Pedido(int pedido, Base base, ArrayList<Sabor> sabor, ArrayList<Topping> topping, int total, String nombre) {
-        this.pedido = pedido;
+    public Pedido(Base base, ArrayList<Sabor> sabores, ArrayList<Topping> toppings, int total, String nombre) {
+        this.pedido = pedidoNum;
         this.base = base;
-        this.sabor = sabor;
-        this.topping = topping;
-        this.total = total;
+        this.sabores = sabores;
+        this.toppings = toppings;
+        this.total = calcularTotal(base, sabores, toppings);
         this.nombre = nombre;
+        pedidoNum++;
+    }
+    public Pedido(Base base) {
+        this.pedido = pedidoNum;
+        this.base = base;
+        this.sabores = null;
+        this.toppings = null;
+        this.total = 0;
+        this.nombre = null;
+        pedidoNum++;
+    }
+    
+    private double calcularTotal( Base base,ArrayList<Sabor> sabores, ArrayList<Topping> toppings){
+        double total = base.getPrecio();
+        for(Sabor s:sabores){
+            total+=s.getPrecio();
+        }
+        for(Topping t :toppings){
+            total+=t.getPrecio();
+        }
+        return total;
     }
 
     public int getPedido() {
@@ -35,15 +57,15 @@ public class Pedido {
         return base;
     }
 
-    public ArrayList<Sabor> getSabor() {
-        return sabor;
+    public ArrayList<Sabor> getSabores() {
+        return sabores;
     }
 
-    public ArrayList<Topping> getTopping() {
-        return topping;
+    public ArrayList<Topping> getToppings() {
+        return toppings;
     }
 
-    public int getTotal() {
+    public double getTotal() {
         return total;
     }
 
@@ -51,6 +73,26 @@ public class Pedido {
         return nombre;
     }
 
+    public void setPedido(int pedido) {
+        this.pedido = pedido;
+    }
+
+    public void setBase(Base base) {
+        this.base = base;
+    }
+
+    public void setSabores(ArrayList<Sabor> sabor) {
+        this.sabores = sabor;
+    }
+
+    public void setToppings(ArrayList<Topping> topping) {
+        this.toppings = topping;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
     @Override
     public String toString() {
         return pedido + "," + total + "," + nombre ;

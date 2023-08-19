@@ -17,7 +17,7 @@ public class Topping {
         this.precio = precio;
     }
 
-    public String getBase() {
+    public String getTopping() {
         return topping;
     }
 
@@ -27,8 +27,11 @@ public class Topping {
 
     @Override
     public String toString() {
-        return topping + "precio = " + precio;
+        return topping;
     }
     
+    public String mostrarDetalles() {
+        return topping+" - "+precio;
+    }
     
 }

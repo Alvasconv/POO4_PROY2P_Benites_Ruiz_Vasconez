@@ -27,8 +27,11 @@ public class Base {
 
     @Override
     public String toString() {
-        return base + "precio = " + precio;
+        return base;
     }
     
+    public String mostrarDetalles() {
+        return base+" - "+precio;
+    }
     
 }
