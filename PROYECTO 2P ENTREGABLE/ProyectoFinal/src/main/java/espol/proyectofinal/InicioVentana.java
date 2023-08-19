@@ -17,8 +17,11 @@ import javafx.stage.Stage;
  */
 public class InicioVentana extends Application{
     
-    public static String pathFiles = "src/main/resources/com/mycompany/heladeriaprueba_decodigo/";
+    public static String pathFiles = "src/main/resources/Files/";
+    
     private static Scene scene;
+    
+   
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -28,7 +31,7 @@ public class InicioVentana extends Application{
 
         scene = new Scene(root, 600, 400);
         stage.setScene(scene);
-        stage.setTitle("Informacion Autos");
+        stage.setTitle("Heladeria JEEZ-FROZ");
         stage.show();
 
     }

@@ -1,6 +1,8 @@
 Clases\Topping.class
 espol\proyectofinal\InicioVentana.class
+espol\proyectofinal\InicioSesionController.class
 module-info.class
 Clases\Sabor.class
+Clases\Usuario.class
 Clases\Base.class
 Clases\Pedido.class

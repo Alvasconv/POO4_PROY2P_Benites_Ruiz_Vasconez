@@ -1,6 +1,11 @@
 Vainilla,1.50
 Cheescake Mora,2.00
-...
-...
-...
-...
+Chocolate,4.20
+Fresa,3.75
+Menta chip,4.80
+Cookies and cream,4.50
+Mango,3.95
+Dulce de leche,4.10
+Frutas del bosque,4.60
+Pistacho,5.00
+Coco,3.80
