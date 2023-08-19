@@ -16,10 +16,21 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
@@ -31,6 +42,17 @@ public class InicioSesionController implements Initializable {
     public static ArrayList<Base> lstbases = new ArrayList<>();
     public static ArrayList<Sabor> lstsabores = new ArrayList<>();
     public static ArrayList<Topping> lsttoppings = new ArrayList<>();
+    public static String usuario = "";
+    @FXML
+    private TextField txusuario;
+    @FXML
+    private Button btsesion;
+    @FXML
+    private PasswordField txcontrasenia;
+    @FXML
+    private HBox vbaviso;
+    @FXML
+    private Pane rootsesion;
     
 
     //public static ArrayList<Usuario> lstusuario = new ArrayList<>();
@@ -114,6 +136,53 @@ public class InicioSesionController implements Initializable {
         }catch(IOException e){
             System.out.println("ERROOOORRR.......");
         }
+    }
+
+    @FXML
+    private void inicaSesion(ActionEvent event) {
+        //
+        for(Usuario u:lstusuarios){
+            //vbaviso.getChildren().clear();
+            if (txusuario.getText().equals(u.getUsuario())){
+                if(txcontrasenia.getText().equals(u.getContrasenia())){
+                    usuario = u.getNombre().toUpperCase();
+                    btsesion.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent e) {
+
+                            try {
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("ventanaBienvenida.fxml"));
+                                Parent root = loader.load();
+
+                                VentanaBienvenidaController controller = loader.getController();
+                                Stage stage = new Stage();
+                                stage.setTitle("Nueva Ventana");
+                                stage.setScene(new Scene(root));
+
+                                // Cerrar la ventana principal
+                                Stage primaryStage = (Stage) btsesion.getScene().getWindow();
+                                primaryStage.close();
+                                stage.show();
+
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+                            }
+
+                        }
+
+                    });
+                }else{
+                    Label aviso = new Label("Contraseña incorrecta");
+                    vbaviso.getChildren().add(aviso);
+                    txcontrasenia.clear();
+                    txusuario.clear();
+                    
+                }
+                break;
+            }    
+        }
+        
+       
     }
     
     
