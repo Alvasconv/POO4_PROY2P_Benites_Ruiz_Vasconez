@@ -6,7 +6,11 @@ package espol.proyectofinal;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
@@ -14,6 +18,17 @@ import javafx.fxml.Initializable;
  * @author vv
  */
 public class ResumenPedidoController implements Initializable {
+
+    @FXML
+    private AnchorPane rootpedido;
+    @FXML
+    private Button btnEliminar;
+    @FXML
+    private Button btnConfirmar;
+    @FXML
+    private Button btnCancelar;
+    @FXML
+    private Label costoTotal;
 
     /**
      * Initializes the controller class.

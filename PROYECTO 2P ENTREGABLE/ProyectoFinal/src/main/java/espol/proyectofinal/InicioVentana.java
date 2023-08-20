@@ -11,6 +11,7 @@ import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -35,6 +36,8 @@ public class InicioVentana extends Application{
         Parent root = fxmLoader.load();
 
         scene = new Scene(root, 600, 400);
+        //scene = new Scene(root, 700, 500);
+
         stage.setScene(scene);
         stage.setTitle("Heladeria JEEZ-FROZ");
         stage.show();

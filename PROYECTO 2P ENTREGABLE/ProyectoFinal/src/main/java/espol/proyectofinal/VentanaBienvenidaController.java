@@ -20,6 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -30,6 +31,9 @@ import javafx.stage.Stage;
  * @author Abeni
  */
 public class VentanaBienvenidaController implements Initializable {
+    
+    public static ListView<String> lviewPedidos = new ListView<>();
+    public static int idpedido =0;
 
     @FXML
     private Pane rootBienvenida;
@@ -97,7 +101,7 @@ public class VentanaBienvenidaController implements Initializable {
         btpedido.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-
+                
                 try {
 //                    FXMLLoader loader = new FXMLLoader(getClass().getResource("Elegirbase.fxml"));
 //                    Parent root = loader.load();
@@ -116,11 +120,34 @@ public class VentanaBienvenidaController implements Initializable {
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
-
+                
+                ventanaGenerarPedidos();
             }
 
         });
         
+    }
+    
+//    -------- este metodo hace que se abra la ventana que se actualiza en vivo cuando llega un nuevo pedido -------
+//    -------- y la invoco dentro de mi metodo handle del metodo mostrar pedido de esta clase 
+    
+    public void ventanaGenerarPedidos(){
+        Stage g = new Stage();
+
+        lviewPedidos.setPrefWidth(300);
+        lviewPedidos.setPrefHeight(250);
+        Pane rootNuevo = new Pane();
+        rootNuevo.getChildren().addAll(lviewPedidos);
+//        ObservableList <String> items = FXCollections.observableArrayList(lpedidos);
+//        lviewPedidos.setItems(items);
+//        lviewPedidos.setDisable(false);
+        
+
+        Scene s = new Scene(rootNuevo, 300, 250);
+        g.setScene(s);
+        g.setTitle("Pedidos Generados");
+        g.show();
+      
     }
     
 }

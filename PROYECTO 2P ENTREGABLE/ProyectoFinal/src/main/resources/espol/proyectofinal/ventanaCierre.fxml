@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="rootcierre" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" styleClass="rootcierre" stylesheets="@../../FolderCSS/FondosVentanas.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espol.proyectofinal.VentanaCierreController">
+   <children>
+      <HBox layoutX="35.0" layoutY="58.0" prefHeight="56.0" prefWidth="565.0">
+         <children>
+            <Label fx:id="lbdespedida" prefHeight="56.0" prefWidth="569.0" text="Tu orden a sido generada con exito" textFill="#b70fe1">
+               <font>
+                  <Font name="System Bold Italic" size="33.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox fx:id="hbllamado" layoutX="45.0" layoutY="114.0" prefHeight="56.0" prefWidth="537.0" />
+      <HBox fx:id="hbconteo" alignment="CENTER" layoutX="363.0" layoutY="432.0" prefHeight="38.0" prefWidth="317.0">
+         <children>
+            <Label fx:id="lbconteo" text="Label">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <ImageView fx:id="imfinal" fitHeight="208.0" fitWidth="152.0" layoutX="282.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</Pane>

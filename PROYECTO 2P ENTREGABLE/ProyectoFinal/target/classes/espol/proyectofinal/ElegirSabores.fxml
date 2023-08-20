@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="410.0" prefWidth="680.0" styleClass="fondosPedirPedido" stylesheets="@../../FolderCSS/FondosVentanas.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espol.proyectofinal.ElegirSaboresController">
+   <children>
+      <Label layoutX="92.0" layoutY="341.0" text="Valor a pagar:" />
+      <Button fx:id="btnContinuar" layoutX="529.0" layoutY="330.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="90.0" text="Continuar" />
+      <Label layoutX="50.0" layoutY="52.0" prefHeight="31.0" prefWidth="148.0" text="Paso 2: Elija los sabores" />
+      <Label fx:id="costoTotal" layoutX="181.0" layoutY="342.0" prefHeight="17.0" prefWidth="34.0" text="0" />
+      <Label fx:id="mensajeException" layoutX="243.0" layoutY="341.0" prefHeight="17.0" prefWidth="223.0" />
+      <ComboBox fx:id="sabor1" layoutX="91.0" layoutY="140.0" prefWidth="150.0" />
+      <ComboBox fx:id="sabor2" layoutX="410.0" layoutY="140.0" prefWidth="150.0" />
+      <Label layoutX="94.0" layoutY="97.0" text="Sabor 1:" />
+      <Label layoutX="410.0" layoutY="89.0" text="Sabor 2:" />
+   </children>
+</AnchorPane>

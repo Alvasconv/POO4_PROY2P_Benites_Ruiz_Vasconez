@@ -23,3 +23,25 @@
     -fx-background-position: center center;
     
 }
+
+.fondosPedirPedido{
+    -fx-background-image: url("bases.png");
+    -fx-background-size:700px 520px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+    
+}
+.rootcierre{
+    -fx-background-image: url("bases.png");
+    -fx-background-size:700px 500px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+    
+}
+.rootpedido{
+    -fx-background-image: url("bases.png");
+    -fx-background-size:800px 600px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+    
+}
