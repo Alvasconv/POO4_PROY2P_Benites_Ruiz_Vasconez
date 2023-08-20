@@ -4,6 +4,9 @@
  */
 package espol.proyectofinal;
 
+import Clases.Pedido;
+import Clases.incompleteStageException;
+import static espol.proyectofinal.ElegirBaseController.pedido;
 import static espol.proyectofinal.InicioSesionController.usuario;
 import java.io.IOException;
 import java.net.URL;
@@ -17,6 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -35,6 +39,7 @@ public class VentanaBienvenidaController implements Initializable {
     private Button btpedido;
     @FXML
     private Label lbienvenida;
+    public static Stage stage1 = new Stage();
 
     /**
      * Initializes the controller class.
@@ -73,6 +78,18 @@ public class VentanaBienvenidaController implements Initializable {
         });
 
     }
+    
+//    public void continuar(){
+//        btpedido.setOnMouseClicked((MouseEvent e) -> {     
+//            try {
+//                InicioVentana.setRoot("ElegirBase.fxml");
+//            } 
+//            catch (IOException ex) {
+//                ex.printStackTrace();
+//            }
+//            
+//        });
+//    }
 
     @FXML
     private void realizapedido(ActionEvent event) {
@@ -82,18 +99,19 @@ public class VentanaBienvenidaController implements Initializable {
             public void handle(ActionEvent e) {
 
                 try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("base.fxml"));
-                    Parent root = loader.load();
-
-                    BaseController controller = loader.getController();
-                    Stage stage = new Stage();
-                    stage.setTitle("Seleccion");
-                    stage.setScene(new Scene(root));
+//                    FXMLLoader loader = new FXMLLoader(getClass().getResource("Elegirbase.fxml"));
+//                    Parent root = loader.load();
+//
+//                    ElegirBaseController controller = loader.getController();
+//                    stage1 = new Stage();
+//                    stage1.setTitle("Seleccion Base");
+//                    stage1.setScene(new Scene(root));
+                    InicioVentana.cambiarEscenasPedirPedidos("ElegirBase.fxml",VentanaBienvenidaController.stage1,"Seleccion Base");
 
                     //Cerrar la ventana principal
                     Stage primaryStage = (Stage) btpedido.getScene().getWindow();
                     primaryStage.close();
-                    stage.show();
+                    stage1.show();
 
                 } catch (IOException ex) {
                     ex.printStackTrace();

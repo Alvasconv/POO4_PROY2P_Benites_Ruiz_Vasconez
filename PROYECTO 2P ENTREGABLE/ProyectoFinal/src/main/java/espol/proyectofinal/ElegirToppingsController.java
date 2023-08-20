@@ -20,7 +20,10 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -125,16 +128,18 @@ public class ElegirToppingsController implements Initializable {
    
     
     public void continuar(){
-        btnContinuar.setOnMouseClicked((MouseEvent e) -> {      
+        btnContinuar.setOnAction((ActionEvent e) -> {
             try {
                 ArrayList<Topping> toppingsPedidos= new ArrayList<>();
                 ElegirBaseController.pedido.setToppings(toppingsPedidos);
-                InicioVentana.setRoot("ResumenPedido.fxml");
-            } 
-            catch (IOException ex) {
+
+                InicioVentana.cambiarEscenasPedirPedidos("ResumenPedido.fxml",VentanaBienvenidaController.stage1,"Resumen del Pedido");
+                
+            } catch (IOException ex) {
                 ex.printStackTrace();
-            }   
+            }
         });
     }
+    
     
 }

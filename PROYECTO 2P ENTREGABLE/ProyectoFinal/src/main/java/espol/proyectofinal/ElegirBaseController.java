@@ -16,13 +16,17 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -130,7 +134,7 @@ public class ElegirBaseController implements Initializable {
      
     
     public void continuar(){
-        btnContinuar.setOnMouseClicked((MouseEvent e) -> {
+        btnContinuar.setOnAction((ActionEvent e) -> {
             
             if (!base1.isSelected() && !base2.isSelected() && !base3.isSelected()){
                 try{
@@ -143,9 +147,9 @@ public class ElegirBaseController implements Initializable {
             else{
                 try {
                     pedido = new Pedido(baseSeleccionada);
-                    InicioVentana.setRoot("ElegirSabores.fxml");
-                } 
-                catch (IOException ex) {
+                    InicioVentana.cambiarEscenasPedirPedidos("ElegirSabores.fxml",VentanaBienvenidaController.stage1,"Seleccion Sabores");
+                    
+                } catch (IOException ex) {
                     ex.printStackTrace();
                 }
             }

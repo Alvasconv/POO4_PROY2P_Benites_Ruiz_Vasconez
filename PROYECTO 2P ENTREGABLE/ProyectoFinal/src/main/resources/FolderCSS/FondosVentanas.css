@@ -23,3 +23,11 @@
     -fx-background-position: center center;
     
 }
+
+.fondosPedirPedido{
+    -fx-background-image: url("bases.png");
+    -fx-background-size:700px 520px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+    
+}

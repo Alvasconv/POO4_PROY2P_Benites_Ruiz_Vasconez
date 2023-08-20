@@ -30,21 +30,23 @@ public class InicioVentana extends Application{
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmLoader = new FXMLLoader(InicioVentana.class.getResource("ElegirBase.fxml"));
+        FXMLLoader fxmLoader = new FXMLLoader(InicioVentana.class.getResource("InicioSesion.fxml"));
 
         Parent root = fxmLoader.load();
 
-        scene = new Scene(root, 800, 600);
+        scene = new Scene(root, 600, 400);
         stage.setScene(scene);
         stage.setTitle("Heladeria JEEZ-FROZ");
         stage.show();
 
     }
-    
-    static void setRoot(String nuevaEscena) throws IOException {
-        FXMLLoader fxmLoader = new FXMLLoader(InicioVentana.class.getResource(nuevaEscena));
-        Parent root = fxmLoader.load();
-        scene.setRoot(root);
+    //Esto solo funciona para las ventanas de la opcion Pedir Pedido
+    static void cambiarEscenasPedirPedidos(String nuevaEscena,Stage stage,String titulo) throws IOException {
+        FXMLLoader loader = new FXMLLoader(VentanaBienvenidaController.class.getResource(nuevaEscena));
+        Parent root = loader.load();            
+        //ElegirSaboresController controller = loader.getController();
+        stage.setTitle(titulo);
+        stage.setScene(new Scene(root,700,520));
     }
     
     public static void insertarImagen(ImageView imgv, String foto, int x, int y){
