@@ -97,7 +97,7 @@ public class ElegirBaseController implements Initializable {
         costoBase3.setText(""+bases.get(2).getPrecio());
         //imagen de cada base
         InicioVentana.insertarImagen(imgBase1,"yogurt.jpg",90,100);
-        InicioVentana.insertarImagen(imgBase2,"helado.jpg",90,100);
+        InicioVentana.insertarImagen(imgBase2,"baseHelado.png",90,100);
         InicioVentana.insertarImagen(imgBase3,"organico.png",90,100);
         //ArrayList de bases
         tgBotones.add(base1);

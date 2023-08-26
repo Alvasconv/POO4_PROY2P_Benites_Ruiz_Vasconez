@@ -36,7 +36,8 @@ import javafx.stage.Stage;
  * @author Abeni
  */
 public class VentanaBienvenidaController implements Initializable {
-    
+    // utilizar este arraylist para aqui agregar los pedidos que se vayan generando; recordar que la clase pedido tiene
+    // varios constructores y cualquiera de estos puede recibir este arraylist pedidosgenerados
     public static ArrayList<Pedido> pedidosgenerados = new ArrayList<>();
     public static ListView<Pedido> lviewPedidos = new ListView<>();
     public static VBox vpedidos = new VBox ();
@@ -62,11 +63,11 @@ public class VentanaBienvenidaController implements Initializable {
         lbienvenida.setText(lbienvenida.getText()+", "+usuario);
         
 //      estos son solo ejemplos de prueba para ver si mi ventana se actualizaba constantemente
-//        pedidosgenerados.add(new Pedido("Alex"));
-//        pedidosgenerados.add(new Pedido("Benites"));
-//        pedidosgenerados.add(new Pedido("Messi"));
-//        pedidosgenerados.add(new Pedido("Ronaldo"));
-//        
+        pedidosgenerados.add(new Pedido("Alex"));
+        pedidosgenerados.add(new Pedido("Benites"));
+        pedidosgenerados.add(new Pedido("Messi"));
+        pedidosgenerados.add(new Pedido("Ronaldo"));
+        
         
         
     }    
@@ -101,17 +102,6 @@ public class VentanaBienvenidaController implements Initializable {
 
     }
     
-//    public void continuar(){
-//        btpedido.setOnMouseClicked((MouseEvent e) -> {     
-//            try {
-//                InicioVentana.setRoot("ElegirBase.fxml");
-//            } 
-//            catch (IOException ex) {
-//                ex.printStackTrace();
-//            }
-//            
-//        });
-//    }
 
     @FXML
     private void realizapedido(ActionEvent event) {
@@ -175,12 +165,9 @@ public class VentanaBienvenidaController implements Initializable {
                     try {
                         Thread.sleep(5000); 
                         System.out.println("hola");
-                        Platform.runLater(() -> {
-                            //g.close();
+                        Platform.runLater(() -> {                         
                             vpedidos.getChildren().clear();
-                            ventanaGenerarPedidos();
-                            //vpedidos.getChildren().clear();
-                            
+                            ventanaGenerarPedidos();                       
                         });
                     } catch (InterruptedException ex) {
                         ex.printStackTrace();
@@ -194,33 +181,5 @@ public class VentanaBienvenidaController implements Initializable {
         backgroundthread.start();
     }
     
-//       public void iniciarThread() {
-//
-//        Thread threadconteo = new Thread(new Runnable() {
-//
-//            public void run() {
-//            for (Pedido item : items) {
 
-//            Platform.runLater(new Runnable() {
-//                 @Override
-//                 public void run() {
-//                     rootNuevo.getChildren().addAll(lviewPedidos); 
-//                 }
-//             });
-//
-//             try {
-//                 Thread.sleep(1000);
-//             } catch (InterruptedException ex) {
-//                 System.out.println("Thread defectuoso");
-//             }
-//        }
-//
-//            }
-//        });
-//
-//        threadconteo.setDaemon(true);
-//
-//        threadconteo.start();
-//
-//    }
 }

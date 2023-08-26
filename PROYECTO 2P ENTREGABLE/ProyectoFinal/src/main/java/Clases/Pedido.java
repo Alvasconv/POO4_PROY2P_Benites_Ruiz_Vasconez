@@ -20,13 +20,13 @@ public class Pedido {
     private static int pedidoNum = 1;
 
     public Pedido(Base base, ArrayList<Sabor> sabores, ArrayList<Topping> toppings, int total, String nombre) {
-        this.pedido = pedidoNum;
+        this.pedido = pedidoNum++;
         this.base = base;
         this.sabores = sabores;
         this.toppings = toppings;
         this.total = calcularTotal(base, sabores, toppings);
         this.nombre = nombre;
-        pedidoNum++;
+        
     }
 
     public Pedido(String nombre) {
@@ -36,13 +36,13 @@ public class Pedido {
     
     
     public Pedido(Base base) {
-        this.pedido = pedidoNum;
+        this.pedido = pedidoNum++;
         this.base = base;
         this.sabores = null;
         this.toppings = null;
         this.total = 0;
         this.nombre = null;
-        pedidoNum++;
+        
     }
     
     private double calcularTotal( Base base,ArrayList<Sabor> sabores, ArrayList<Topping> toppings){

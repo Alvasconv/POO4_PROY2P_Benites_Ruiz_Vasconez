@@ -54,6 +54,6 @@ public class Local {
     }
     
     public String toString(){
-        return this.nombre+" "+this.horario;
+        return nombre+";"+horario+";"+coordenadax+";"+coordenadaY;
     }
 }

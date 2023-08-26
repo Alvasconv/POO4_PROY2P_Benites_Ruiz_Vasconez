@@ -5,7 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="410.0" prefWidth="680.0" styleClass="fondosPedirPedido" stylesheets="@../../FolderCSS/FondosVentanas.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espol.proyectofinal.ElegirSaboresController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" styleClass="fondosPedirPedido" stylesheets="@../../FolderCSS/FondosVentanas.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espol.proyectofinal.ElegirSaboresController">
    <children>
       <Label layoutX="92.0" layoutY="341.0" text="Valor a pagar:" />
       <Button fx:id="btnContinuar" layoutX="529.0" layoutY="330.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="90.0" text="Continuar" />

@@ -35,8 +35,8 @@ public class InicioVentana extends Application{
 
         Parent root = fxmLoader.load();
 
-        scene = new Scene(root, 600, 400);
-        //scene = new Scene(root, 700, 500);
+        //scene = new Scene(root, 600, 400);
+        scene = new Scene(root, 700, 500);
 
         stage.setScene(scene);
         stage.setTitle("Heladeria JEEZ-FROZ");

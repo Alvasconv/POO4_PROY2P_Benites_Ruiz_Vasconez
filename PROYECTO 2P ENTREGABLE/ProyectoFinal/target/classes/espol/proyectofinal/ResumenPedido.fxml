@@ -6,15 +6,15 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" fx:id="rootpedido" prefHeight="600.0" prefWidth="800.0" styleClass="rootpedido" stylesheets="@../../FolderCSS/FondosVentanas.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espol.proyectofinal.ResumenPedidoController">
+<AnchorPane id="AnchorPane" fx:id="rootpedido" prefHeight="500.0" prefWidth="700.0" styleClass="rootpedido" stylesheets="@../../FolderCSS/FondosVentanas.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espol.proyectofinal.ResumenPedidoController">
    <children>
       <TextArea editable="false" layoutX="62.0" layoutY="129.0" prefHeight="273.0" prefWidth="372.0" />
       <Button fx:id="btnEliminar" layoutX="514.0" layoutY="143.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="123.0" text="Eliminar" />
       <Label layoutX="105.0" layoutY="73.0" prefHeight="29.0" prefWidth="79.0" text="Tu Pedido" />
-      <Button fx:id="btnConfirmar" layoutX="426.0" layoutY="514.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="96.0" text="Confirmar" />
-      <Button fx:id="btnCancelar" layoutX="616.0" layoutY="514.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="79.0" text="Cancelar" />
-      <Label layoutX="102.0" layoutY="527.0" prefHeight="17.0" prefWidth="86.0" text="Total a pagar: " />
-      <Label fx:id="costoTotal" layoutX="234.0" layoutY="527.0" prefHeight="17.0" prefWidth="28.0" text="0" />
+      <Button fx:id="btnConfirmar" layoutX="434.0" layoutY="441.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="96.0" text="Confirmar" />
+      <Button fx:id="btnCancelar" layoutX="576.0" layoutY="441.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="79.0" text="Cancelar" />
+      <Label layoutX="82.0" layoutY="454.0" prefHeight="17.0" prefWidth="86.0" text="Total a pagar: " />
+      <Label fx:id="costoTotal" layoutX="170.0" layoutY="454.0" prefHeight="17.0" prefWidth="28.0" text="0" />
    </children>
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
