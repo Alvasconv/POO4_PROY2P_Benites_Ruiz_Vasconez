@@ -10,7 +10,11 @@ import static espol.proyectofinal.ElegirBaseController.pedido;
 import static espol.proyectofinal.InicioSesionController.usuario;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -23,6 +27,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -32,8 +37,12 @@ import javafx.stage.Stage;
  */
 public class VentanaBienvenidaController implements Initializable {
     
-    public static ListView<String> lviewPedidos = new ListView<>();
-    public static int idpedido =0;
+    public static ArrayList<Pedido> pedidosgenerados = new ArrayList<>();
+    public static ListView<Pedido> lviewPedidos = new ListView<>();
+    public static VBox vpedidos = new VBox ();
+    public static Stage g = new Stage();
+    //public static int idpedido =0;
+    //public static Pane rootNuevo = new Pane();
 
     @FXML
     private Pane rootBienvenida;
@@ -51,6 +60,15 @@ public class VentanaBienvenidaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         lbienvenida.setText(lbienvenida.getText()+", "+usuario);
+        
+//      estos son solo ejemplos de prueba para ver si mi ventana se actualizaba constantemente
+//        pedidosgenerados.add(new Pedido("Alex"));
+//        pedidosgenerados.add(new Pedido("Benites"));
+//        pedidosgenerados.add(new Pedido("Messi"));
+//        pedidosgenerados.add(new Pedido("Ronaldo"));
+//        
+        
+        
     }    
 
     @FXML
@@ -122,6 +140,7 @@ public class VentanaBienvenidaController implements Initializable {
                 }
                 
                 ventanaGenerarPedidos();
+                actualizarVentanaPedidos();
             }
 
         });
@@ -132,22 +151,76 @@ public class VentanaBienvenidaController implements Initializable {
 //    -------- y la invoco dentro de mi metodo handle del metodo mostrar pedido de esta clase 
     
     public void ventanaGenerarPedidos(){
-        Stage g = new Stage();
-
         lviewPedidos.setPrefWidth(300);
         lviewPedidos.setPrefHeight(250);
-        Pane rootNuevo = new Pane();
-        rootNuevo.getChildren().addAll(lviewPedidos);
-//        ObservableList <String> items = FXCollections.observableArrayList(lpedidos);
-//        lviewPedidos.setItems(items);
-//        lviewPedidos.setDisable(false);
         
-
+        ObservableList <Pedido> items = FXCollections.observableArrayList(pedidosgenerados);
+        lviewPedidos.setItems(items);
+        lviewPedidos.setDisable(false);
+        vpedidos.getChildren().add(lviewPedidos);
+        Pane rootNuevo = new Pane();
+        rootNuevo.getChildren().addAll(vpedidos); 
+      
         Scene s = new Scene(rootNuevo, 300, 250);
         g.setScene(s);
         g.setTitle("Pedidos Generados");
         g.show();
-      
     }
     
+    public void actualizarVentanaPedidos(){
+        Thread backgroundthread = new Thread(new Runnable() {
+
+            public void run() {
+                while (true) {
+                    try {
+                        Thread.sleep(5000); 
+                        System.out.println("hola");
+                        Platform.runLater(() -> {
+                            //g.close();
+                            vpedidos.getChildren().clear();
+                            ventanaGenerarPedidos();
+                            //vpedidos.getChildren().clear();
+                            
+                        });
+                    } catch (InterruptedException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+                
+            }
+
+        });
+        backgroundthread.setDaemon(true);
+        backgroundthread.start();
+    }
+    
+//       public void iniciarThread() {
+//
+//        Thread threadconteo = new Thread(new Runnable() {
+//
+//            public void run() {
+//            for (Pedido item : items) {
+
+//            Platform.runLater(new Runnable() {
+//                 @Override
+//                 public void run() {
+//                     rootNuevo.getChildren().addAll(lviewPedidos); 
+//                 }
+//             });
+//
+//             try {
+//                 Thread.sleep(1000);
+//             } catch (InterruptedException ex) {
+//                 System.out.println("Thread defectuoso");
+//             }
+//        }
+//
+//            }
+//        });
+//
+//        threadconteo.setDaemon(true);
+//
+//        threadconteo.start();
+//
+//    }
 }

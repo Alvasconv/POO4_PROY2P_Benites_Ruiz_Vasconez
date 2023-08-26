@@ -28,6 +28,13 @@ public class Pedido {
         this.nombre = nombre;
         pedidoNum++;
     }
+
+    public Pedido(String nombre) {
+        this.pedido = pedidoNum++;
+        this.nombre = nombre;
+    }
+    
+    
     public Pedido(Base base) {
         this.pedido = pedidoNum;
         this.base = base;
@@ -95,12 +102,9 @@ public class Pedido {
     
     @Override
     public String toString() {
-        return pedido + "," + total + "," + nombre ;
+        return nombre +","+pedido ;
+        
     }
     
-    
-    
-    
-    
-    
 }
+
