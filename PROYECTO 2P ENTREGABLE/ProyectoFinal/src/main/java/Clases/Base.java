@@ -4,11 +4,13 @@
  */
 package Clases;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Abeni
  */
-public class Base {
+public class Base implements Serializable {
     private String base;
     private double precio;
 

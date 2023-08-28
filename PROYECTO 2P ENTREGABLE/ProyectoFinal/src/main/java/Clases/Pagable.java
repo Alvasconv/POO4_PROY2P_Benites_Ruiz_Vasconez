@@ -10,6 +10,8 @@ package Clases;
  */
 public interface Pagable {
     
-    public abstract Pago generarTransacción(boolean b);
+    public abstract Pago generarTransaccionE();
+    
+    public abstract Pago generarTransaccionT();
     
 }

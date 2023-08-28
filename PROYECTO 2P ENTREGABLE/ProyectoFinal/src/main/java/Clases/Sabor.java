@@ -4,11 +4,13 @@
  */
 package Clases;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Abeni
  */
-public class Sabor {
+public class Sabor implements Serializable{
     private String sabor;
     private double precio;
 

@@ -4,11 +4,13 @@
  */
 package Clases;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Abeni
  */
-public class Topping {
+public class Topping implements Serializable{
     private String topping;
     private double precio;
 

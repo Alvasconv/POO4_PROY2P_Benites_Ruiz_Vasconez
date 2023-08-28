@@ -136,6 +136,7 @@ public class ElegirSaboresController implements Initializable {
                     }
                     ElegirBaseController.pedido.setSabores(saboresPedidos);
                     
+                    
                     InicioVentana.cambiarEscenasPedirPedidos("ElegirToppings.fxml",VentanaBienvenidaController.stage1,"Seleccion Toppings");   
                 } 
                 catch (IOException ex) {

@@ -147,6 +147,7 @@ public class ElegirBaseController implements Initializable {
             else{
                 try {
                     pedido = new Pedido(baseSeleccionada);
+                    pedido.setNombre(InicioSesionController.usuario);
                     InicioVentana.cambiarEscenasPedirPedidos("ElegirSabores.fxml",VentanaBienvenidaController.stage1,"Seleccion Sabores");
                     
                 } catch (IOException ex) {

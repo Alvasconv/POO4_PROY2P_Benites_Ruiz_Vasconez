@@ -4,7 +4,9 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
 
@@ -15,23 +17,31 @@
             <Font size="32.0" />
          </font>
       </Label>
-      <RadioButton fx:id="efectivo" layoutX="68.0" layoutY="114.0" mnemonicParsing="false" text="Efectivo" />
-      <RadioButton fx:id="trjcredito" layoutX="225.0" layoutY="114.0" mnemonicParsing="false" onAction="#pagoTarjeta" text="Tarjeta de credito" />
-      <Label layoutX="73.0" layoutY="151.0" text="Detalles de pago:" textFill="#e460bf">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="117.0" layoutY="183.0" text="Valor a pagar" />
-      <Label layoutX="117.0" layoutY="209.0" text="Adicional tarjeta" />
-      <Label layoutX="117.0" layoutY="234.0" text="I.V.A" />
-      <Label layoutX="117.0" layoutY="259.0" text="Total a Pagar" />
-      <TextField fx:id="valor" layoutX="208.0" layoutY="179.0" />
-      <TextField fx:id="valortrj" layoutX="208.0" layoutY="205.0" />
-      <TextField fx:id="iva" layoutX="208.0" layoutY="230.0" />
-      <TextField fx:id="total" layoutX="208.0" layoutY="255.0" />
-      <Label fx:id="lblpedido" layoutX="145.0" layoutY="317.0" prefHeight="17.0" prefWidth="288.0" />
+      <RadioButton fx:id="efectivo" layoutX="68.0" layoutY="114.0" mnemonicParsing="false" text="Efectivo">
+         <toggleGroup>
+            <ToggleGroup fx:id="opciones" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="trjcredito" layoutX="225.0" layoutY="114.0" mnemonicParsing="false" text="Tarjeta de credito" toggleGroup="$opciones" />
       <Button fx:id="btnConfirmar" layoutX="392.0" layoutY="349.0" mnemonicParsing="false" text="Confirmar" />
       <Button fx:id="btnCancelar" layoutX="487.0" layoutY="349.0" mnemonicParsing="false" text="Cancelar" />
+      <AnchorPane fx:id="rootDetalles" layoutX="66.0" layoutY="135.0" prefHeight="171.0" prefWidth="398.0">
+         <children>
+            <Label layoutX="12.0" layoutY="10.0" text="Detalles de pago:" textFill="#e460bf">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="56.0" layoutY="53.0" text="Valor a pagar" />
+            <Label layoutX="64.0" layoutY="97.0" text="I.V.A" />
+            <Label layoutX="31.0" layoutY="73.0" text="Adicional tarjeta" />
+            <Label layoutX="45.0" layoutY="124.0" text="Total a Pagar" />
+            <TextField fx:id="valor" layoutX="135.0" layoutY="41.0" />
+            <TextField fx:id="valortrj" layoutX="125.0" layoutY="69.0" />
+            <TextField fx:id="iva" layoutX="135.0" layoutY="93.0" />
+            <TextField fx:id="total" layoutX="135.0" layoutY="129.0" />
+            <HBox fx:id="hbLabel" layoutX="31.0" layoutY="170.0" prefHeight="25.0" prefWidth="371.0" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
