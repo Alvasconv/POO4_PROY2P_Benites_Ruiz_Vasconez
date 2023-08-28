@@ -54,7 +54,7 @@ public class InicioSesionController implements Initializable {
     @FXML
     private Pane rootsesion;
     
-
+    
     //public static ArrayList<Usuario> lstusuario = new ArrayList<>();
     /**
      * Initializes the controller class.

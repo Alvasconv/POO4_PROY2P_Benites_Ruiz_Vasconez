@@ -31,7 +31,7 @@ public class Base {
     }
     
     public String mostrarDetalles() {
-        return base+" - "+precio;
+        return "Base: "+base;
     }
     
 }

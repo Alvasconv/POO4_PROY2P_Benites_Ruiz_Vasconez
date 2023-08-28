@@ -31,7 +31,7 @@ public class Sabor {
     }
     
     public String mostrarDetalles() {
-        return sabor+" - "+precio;
+        return "Sabor: "+sabor;
     }
     
 }

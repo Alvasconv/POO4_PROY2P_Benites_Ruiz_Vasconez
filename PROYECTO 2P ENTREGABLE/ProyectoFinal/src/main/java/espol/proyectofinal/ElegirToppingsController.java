@@ -131,6 +131,12 @@ public class ElegirToppingsController implements Initializable {
         btnContinuar.setOnAction((ActionEvent e) -> {
             try {
                 ArrayList<Topping> toppingsPedidos= new ArrayList<>();
+                for(CheckBox cb: cbGrupo){
+                    if(cb.isSelected()){
+                        int ind = cbGrupo.indexOf(cb);
+                        toppingsPedidos.add(toppings.get(ind));
+                    }
+                }
                 ElegirBaseController.pedido.setToppings(toppingsPedidos);
 
                 InicioVentana.cambiarEscenasPedirPedidos("ResumenPedido.fxml",VentanaBienvenidaController.stage1,"Resumen del Pedido");

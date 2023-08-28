@@ -31,7 +31,7 @@ public class Topping {
     }
     
     public String mostrarDetalles() {
-        return topping+" - "+precio;
+        return "Topping: "+topping;
     }
     
 }

@@ -4,13 +4,14 @@
  */
 package Clases;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Abeni
  */
-public class Pedido {
+public class Pedido implements Serializable {
     private int pedido;
     private Base base;
     private ArrayList<Sabor> sabores;
@@ -24,7 +25,7 @@ public class Pedido {
         this.base = base;
         this.sabores = sabores;
         this.toppings = toppings;
-        this.total = calcularTotal(base, sabores, toppings);
+        calcularTotal();
         this.nombre = nombre;
         
     }
@@ -45,13 +46,25 @@ public class Pedido {
         
     }
     
-    private double calcularTotal( Base base,ArrayList<Sabor> sabores, ArrayList<Topping> toppings){
-        double total = base.getPrecio();
+    public ArrayList<String> detallarPedido(){
+        ArrayList<String> pedidoDetallado = new ArrayList<>();
+        pedidoDetallado.add(base.mostrarDetalles());
+        for(Sabor s: sabores){
+            pedidoDetallado.add(s.mostrarDetalles());
+        }
+        for(Topping t: toppings){
+            pedidoDetallado.add(t.mostrarDetalles());
+        }
+        return pedidoDetallado;
+    }
+    
+    public double calcularTotal( ){
+        this.total = base.getPrecio();
         for(Sabor s:sabores){
-            total+=s.getPrecio();
+            this.total+=s.getPrecio();
         }
         for(Topping t :toppings){
-            total+=t.getPrecio();
+            this.total+=t.getPrecio();
         }
         return total;
     }
@@ -102,9 +115,11 @@ public class Pedido {
     
     @Override
     public String toString() {
-        return nombre +","+pedido ;
-        
+        return nombre +","+pedido ; 
     }
     
+    public String writePedido() {
+        return pedido+","+nombre+","+total ; 
+    }
 }
 
