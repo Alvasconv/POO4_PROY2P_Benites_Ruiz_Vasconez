@@ -45,3 +45,22 @@
     -fx-background-position: center center;
     
 }
+
+#panelPedido{
+    -fx-background-color: white;
+    
+}
+
+.hbPedido{
+    -fx-min-height:20px;
+    -fx-padding: 5px;
+    
+}
+
+.hbPedido:hover{
+    -fx-border-color:darkcyan;
+}
+
+.botones:active{
+    
+}

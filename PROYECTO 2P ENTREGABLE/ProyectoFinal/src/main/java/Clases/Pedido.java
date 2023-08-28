@@ -5,13 +5,14 @@
 package Clases;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
  *
  * @author Abeni
  */
-public class Pedido implements Serializable {
+public class Pedido implements Serializable,Pagable {
     private int pedido;
     private Base base;
     private ArrayList<Sabor> sabores;
@@ -48,11 +49,11 @@ public class Pedido implements Serializable {
     
     public ArrayList<String> detallarPedido(){
         ArrayList<String> pedidoDetallado = new ArrayList<>();
-        pedidoDetallado.add(base.mostrarDetalles());
-        for(Sabor s: sabores){
+        pedidoDetallado.add(this.base.mostrarDetalles());
+        for(Sabor s: this.sabores){
             pedidoDetallado.add(s.mostrarDetalles());
         }
-        for(Topping t: toppings){
+        for(Topping t: this.toppings){
             pedidoDetallado.add(t.mostrarDetalles());
         }
         return pedidoDetallado;
@@ -120,6 +121,31 @@ public class Pedido implements Serializable {
     
     public String writePedido() {
         return pedido+","+nombre+","+total ; 
+    }
+
+    @Override
+    public Pago generarTransacción(boolean b) {
+        double valor=this.calcularTotal();
+        int idpedido=this.pedido;
+        String n=this.nombre;
+        LocalDate fechaActual = LocalDate.now();
+        String tipo;
+        double adicional;
+        double iva;
+        double t;
+        if(b==true){
+            tipo="C";
+            adicional=valor*10/100;
+            iva=(valor+adicional)*12/100;
+            t=valor+adicional+iva;
+        }else{
+            tipo="E";
+            adicional=0.0;
+            iva=(valor+adicional)*12/100;
+            t=valor+adicional+iva;
+        }
+        Pago p=new Pago(idpedido,n ,t,iva,adicional,valor, fechaActual ,tipo);
+        return p;
     }
 }
 

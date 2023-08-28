@@ -5,6 +5,7 @@ espol\proyectofinal\LocalesController$1$1.class
 espol\proyectofinal\ElegirToppingsController$1.class
 espol\proyectofinal\VentanaBienvenidaController.class
 espol\proyectofinal\VentanaBienvenidaController$1.class
+espol\proyectofinal\VentanaPagoController.class
 espol\proyectofinal\VentanaBienvenidaController$3.class
 espol\proyectofinal\LocalesController.class
 espol\proyectofinal\ElegirBaseController$1.class
@@ -14,6 +15,7 @@ espol\proyectofinal\ElegirToppingsController.class
 Clases\incompleteStageException.class
 espol\proyectofinal\LocalesController$1.class
 espol\proyectofinal\VentanaBienvenidaController$2.class
+Clases\Pagable.class
 Clases\Topping.class
 espol\proyectofinal\InicioSesionController.class
 espol\proyectofinal\VentanaCierreController$1.class

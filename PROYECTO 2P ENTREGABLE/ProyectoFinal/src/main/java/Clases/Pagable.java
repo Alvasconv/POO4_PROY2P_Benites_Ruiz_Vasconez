@@ -10,6 +10,6 @@ package Clases;
  */
 public interface Pagable {
     
-    public abstract void generarTransacción();
+    public abstract Pago generarTransacción(boolean b);
     
 }

@@ -133,6 +133,7 @@ public class ResumenPedidoController implements Initializable {
         Label lb=new Label();
         Button bConfirmar = new Button("Confirmar");
         Button bCancelar = new Button("Cancelar");
+       
         
         if(caso=="eliminar Sabor"){
             lb.setText("¿Esta seguro de eliminar el componente?");
@@ -153,7 +154,7 @@ public class ResumenPedidoController implements Initializable {
             bCancelar.setOnMouseClicked((MouseEvent e)->{
                 stg1.close();
             }); 
-        }
+            }
         if(caso=="cancelar Pedido"){
             lb.setText("¿Esta seguro de cancelar su compra?");
             bConfirmar.setOnMouseClicked((MouseEvent e)->{

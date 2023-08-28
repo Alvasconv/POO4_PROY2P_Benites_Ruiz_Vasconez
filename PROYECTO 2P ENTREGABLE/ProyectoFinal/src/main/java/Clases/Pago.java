@@ -4,6 +4,7 @@
  */
 package Clases;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -11,20 +12,28 @@ import java.util.Date;
  * @author Abeni
  */
 public class Pago {
+    
     private int idpago;
     private int idpedido;
     private String nombreCLiente;
     private double totalPagar;
-    private Date fecha;
+    private double iva;
+    private double valorTrj;
+    private double valorSinAdiciones;
+    private LocalDate fecha;
     private String tipoPago;
+    private static int pagoNum = 1;
 
-    public Pago(int idpago, int idpedido, String nombreCLiente, double totalPagar, Date fecha, String tipoPago) {
-        this.idpago = idpago;
+    public Pago(int idpedido, String nombreCLiente, double totalPagar,double iva,double valorTrj,double valorSinAdiciones, LocalDate fecha, String tipoPago) {
+        this.idpago = pagoNum++;
         this.idpedido = idpedido;
         this.nombreCLiente = nombreCLiente;
         this.totalPagar = totalPagar;
         this.fecha = fecha;
         this.tipoPago = tipoPago;
+        this.valorSinAdiciones=valorSinAdiciones;
+        this.iva=iva;
+        this.valorTrj=valorTrj;
     }
 
     public int getIdpago() {
@@ -43,12 +52,24 @@ public class Pago {
         return totalPagar;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
     public String getTipoPago() {
         return tipoPago;
+    }
+    
+    public double getIva() {
+        return iva;
+    }
+
+    public double getValorTrj() {
+        return valorTrj;
+    }
+
+    public double getValorSinAdiciones() {
+        return valorSinAdiciones;
     }
 
     @Override
