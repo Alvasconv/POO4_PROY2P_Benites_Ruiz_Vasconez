@@ -122,31 +122,7 @@ public class Pedido implements Serializable,Pagable {
     public String writePedido() {
         return pedido+","+nombre+","+total ; 
     }
-
-//    @Override
-//    public Pago generarTransacción(boolean b) {
-//        double valor=this.calcularTotal();
-//        int idpedido=this.pedido;
-//        String n=this.nombre;
-//        LocalDate fechaActual = LocalDate.now();
-//        String tipo;
-//        double adicional;
-//        double iva;
-//        double t;
-//        if(b==true){
-//            tipo="C";
-//            adicional=valor*10/100;
-//            iva=(valor+adicional)*12/100;
-//            t=valor+adicional+iva;
-//        }else{
-//            tipo="E";
-//            adicional=0.0;
-//            iva=(valor+adicional)*12/100;
-//            t=valor+adicional+iva;
-//        }
-//        Pago p=new Pago(idpedido,n ,t,iva,adicional,valor, fechaActual ,tipo);
-//        return p;
-//    }
+ 
      @Override
     public Pago generarTransaccionE(){
         double valor=this.calcularTotal();

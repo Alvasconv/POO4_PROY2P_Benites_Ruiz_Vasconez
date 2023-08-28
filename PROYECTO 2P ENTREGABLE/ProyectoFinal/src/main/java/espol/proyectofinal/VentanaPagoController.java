@@ -5,18 +5,24 @@
 package espol.proyectofinal;
 
 import Clases.Pago;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -56,7 +62,7 @@ public class VentanaPagoController implements Initializable {
    private Button btnCancelar;
    
    @FXML
-   private HBox hbLabel;
+   private VBox hbLabel;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -106,8 +112,47 @@ public class VentanaPagoController implements Initializable {
                 valortrj.setText(Double.toString(p.getValorTrj()));
                 total.setText(Double.toString(p.getTotalPagar()));
                 hbLabel.getChildren().clear();
+                
+                Label lab=new Label("Inserte los datos de su tarjeta:");
+                HBox h=new HBox();
+                Label name=new Label("Nombre:");
+                Label num=new Label("Numero:");
+                Label Fecha=new Label("Fecha Caducidad:");
+                Label cvv=new Label("CVV");
+                VBox labels=new VBox();
+                labels.getChildren().addAll(name,num,Fecha,cvv);
+                VBox textfields=new VBox();
+                TextField tname=new TextField();
+                TextField tnum=new TextField();
+                TextField tcvv=new TextField();
+                DatePicker date=new DatePicker();
+                textfields.getChildren().addAll(tname,tnum,date,tcvv);
+                h.getChildren().addAll(labels,textfields);
+                
+                hbLabel.getChildren().addAll(lab,h);
+                
              }
         });
     }
   
+    @FXML
+    public void confirmar(){
+        try(BufferedWriter br=new BufferedWriter(new FileWriter(InicioVentana.pathFiles+"pagos.txt"))){
+            br.write(ElegirBaseController.pedido.generarTransaccionT().writePago()+"\n");
+        }catch(IOException e){
+            System.out.println("FALLO ESCRITURA EN AL ARCHIVO TXT PAGOS");
+            System.out.println(e.getMessage());
+        }
+        try {
+            InicioVentana.cambiarEscenasPedirPedidos("VentanaBienvenida.fxml",VentanaBienvenidaController.stage1,"Ventana Bienvenida");
+        } catch (IOException ex) {
+           System.out.println(ex.getMessage());
+        }
+    }
+    
+    @FXML
+    public void cancelar(){
+        
+     }
+    
 }

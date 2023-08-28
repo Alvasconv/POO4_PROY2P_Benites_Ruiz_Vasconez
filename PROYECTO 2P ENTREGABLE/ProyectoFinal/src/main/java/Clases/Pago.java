@@ -71,6 +71,10 @@ public class Pago {
     public double getValorSinAdiciones() {
         return valorSinAdiciones;
     }
+    
+    public String writePago(){
+        return idpago+","+idpedido+","+nombreCLiente+","+totalPagar+","+fecha+","+tipoPago;
+    }
 
     @Override
     public String toString() {
