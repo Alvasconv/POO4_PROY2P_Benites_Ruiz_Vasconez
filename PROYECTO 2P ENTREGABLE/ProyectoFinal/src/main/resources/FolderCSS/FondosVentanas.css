@@ -24,13 +24,6 @@
     
 }
 
-.fondosPedirPedido{
-    -fx-background-image: url("bases.png");
-    -fx-background-size:700px 520px;
-    -fx-background-repeat: no-repeat;
-    -fx-background-position: center center;
-    
-}
 .rootcierre{
     -fx-background-image: url("bases.png");
     -fx-background-size:700px 500px;
@@ -46,21 +39,105 @@
     
 }
 
+
+
+.botones {
+  -fx-background-color:#efb810 ;
+  -fx-border-radius: 6px;
+  -fx-box-shadow: rgba(0,0,0,0.8), 10, 0, 0, 0;
+  -fx-box-sizing: border-box;
+  -fx-display: inline-block;
+  -fx-font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+  -fx-font-size: 13px;
+  -fx-font-weight: 800;
+  -fx-line-height: 16px;
+  -fx-text-align: center;
+  -fx-webkit-user-select: none;
+  -fx-touch-action: manipulation;
+  -fx-vertical-align: middle;
+  -fx-min-height:50px;
+  -fx-min-width:100px;
+}
+
+.botones:hover{
+  -fx-min-height:55px;
+  -fx-min-width:105px;
+  -fx-background-color: #fcea74;
+}
+
+.texto{
+  -fx-font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+  -fx-font-size: 13px;
+  -fx-font-weight: 800;
+}
+
+.fondosPedirPedido{
+    -fx-background-image: url("bases.png");
+    -fx-background-size:700px 520px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+    
+}
+
+
+/*Titulos de las ventanas en pedir pedido*/
+.tituloPedidos{
+    -fx-font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+    -fx-font-size: 36px;
+    -fx-font-weight: 800;
+    -fx-text-fill:#c71585;
+}
+
+
+/*Ventana Elegir Base*/
+.tgboton{
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+    -fx-font-size: 13px;
+    -fx-font-weight: 800;
+}
+.tgboton:hover{
+    -fx-border-color:darkcyan;
+}
+.tgboton:selected {
+    -fx-background-color:darkcyan;
+    -fx-border-color:darkgreen ;
+}
+
+/*Ventana Elegir Sabores*/
+.cmbBox{
+    -fx-background-color:floralwhite ;
+    -fx-text-fill: -fx-text-base-color;
+    -fx-padding: 3 0 2 7;
+    -fx-cell-size: 1.66667em; 
+    -fx-font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+    -fx-font-size: 13px;
+}
+
+/*Ventana Elegir Toppings*/
+.checkbox{
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+
+}
+.checkbox:hover{
+
+}
+.checkbox:selected{
+
+}
+
+/*Ventana Resumen Pedido*/
 #panelPedido{
     -fx-background-color: white;
     
 }
-
 .hbPedido{
     -fx-min-height:20px;
     -fx-padding: 5px;
     
 }
-
 .hbPedido:hover{
     -fx-border-color:darkcyan;
-}
-
-.botones:active{
-    
 }

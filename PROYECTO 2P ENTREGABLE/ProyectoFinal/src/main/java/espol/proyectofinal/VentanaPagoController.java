@@ -18,6 +18,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -63,6 +64,8 @@ public class VentanaPagoController implements Initializable {
    
    @FXML
    private VBox hbLabel;
+    @FXML
+    private ToggleGroup opciones;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {

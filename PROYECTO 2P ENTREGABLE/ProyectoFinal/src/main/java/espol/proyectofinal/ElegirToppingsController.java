@@ -118,9 +118,9 @@ public class ElegirToppingsController implements Initializable {
                     sumaTotal-=costo;   
                 }
                 if(sumaTotal<0.01){
-                    costoTotal.setText("0");
+                    costoTotal.setText("Valor a pagar: 0");
                 }else{
-                    costoTotal.setText(df.format(sumaTotal));
+                    costoTotal.setText("Valor a pagar: "+df.format(sumaTotal));
                 }
             }
         }

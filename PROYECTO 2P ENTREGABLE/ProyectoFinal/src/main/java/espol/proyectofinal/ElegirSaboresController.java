@@ -108,7 +108,7 @@ public class ElegirSaboresController implements Initializable {
 
                 
                 double sumaTotal = costoSabor1+costoSabor2;
-                costoTotal.setText(""+sumaTotal);
+                costoTotal.setText("Valor a pagar: "+sumaTotal);
             }   
         }
     };

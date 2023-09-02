@@ -115,7 +115,7 @@ public class ElegirBaseController implements Initializable {
                 int indTgBoton = tgBotones.indexOf(tgboton);
                 
                 if(tgboton.isSelected()){
-                    costoTotal.setText(""+bases.get(indTgBoton).getPrecio());
+                    costoTotal.setText("Valor a pagar: "+bases.get(indTgBoton).getPrecio());
                     baseSeleccionada = bases.get(indTgBoton);
                     for (ToggleButton tg2: tgBotones){
                         if(!tg2.equals(tgboton)){
@@ -125,7 +125,7 @@ public class ElegirBaseController implements Initializable {
                 }
                 
                 if(!tgboton.isSelected()){
-                    costoTotal.setText("0");
+                    costoTotal.setText("Valor a pagar: 0");
                     baseSeleccionada = null;  
                 }               
             }

@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" fx:id="rootPago" prefHeight="500.0" prefWidth="700.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1" fx:controller="espol.proyectofinal.VentanaPagoController">
+<AnchorPane id="AnchorPane" fx:id="rootPago" prefHeight="500.0" prefWidth="700.0" styleClass="rootpedido" stylesheets="@../../FolderCSS/FondosVentanas.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espol.proyectofinal.VentanaPagoController">
    <children>
       <Label layoutX="68.0" layoutY="60.0" prefHeight="47.0" prefWidth="98.0" text="Pago" textFill="#e460bf">
          <font>
@@ -23,8 +22,8 @@
          </toggleGroup>
       </RadioButton>
       <RadioButton fx:id="trjcredito" layoutX="225.0" layoutY="114.0" mnemonicParsing="false" text="Tarjeta de credito" toggleGroup="$opciones" />
-      <Button fx:id="btnConfirmar" layoutX="453.0" layoutY="448.0" mnemonicParsing="false" onAction="#confirmar" text="Confirmar" />
-      <Button fx:id="btnCancelar" layoutX="558.0" layoutY="448.0" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
+      <Button fx:id="btnConfirmar" layoutX="453.0" layoutY="448.0" mnemonicParsing="false" onAction="#confirmar" styleClass="botones" stylesheets="@../../FolderCSS/FondosVentanas.css" text="Confirmar" />
+      <Button fx:id="btnCancelar" layoutX="558.0" layoutY="448.0" mnemonicParsing="false" onAction="#cancelar" styleClass="botones" stylesheets="@../../FolderCSS/FondosVentanas.css" text="Cancelar" />
       <AnchorPane fx:id="rootDetalles" layoutX="66.0" layoutY="135.0" prefHeight="151.0" prefWidth="396.0">
          <children>
             <Label layoutX="12.0" layoutY="10.0" prefHeight="25.0" prefWidth="160.0" text="Detalles de pago:" textFill="#e460bf">
