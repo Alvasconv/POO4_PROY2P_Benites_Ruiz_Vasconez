@@ -15,6 +15,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -60,7 +61,8 @@ public class ResumenPedidoController implements Initializable {
     private Label totalPagar;
     
     ArrayList<HBox> itemsPedido = new ArrayList<>();
-    int indiceHB;    
+    int indiceHB;
+    DecimalFormat df = new DecimalFormat("0.00");
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -68,7 +70,7 @@ public class ResumenPedidoController implements Initializable {
         for(HBox h:itemsPedido){
             h.setOnMouseClicked(evvb);
         }
-        totalPagar.setText("Total a pagar: "+ElegirBaseController.pedido.calcularTotal());
+        totalPagar.setText("Total a pagar: "+df.format(ElegirBaseController.pedido.calcularTotal()));
         eliminar();
         btnCancelar.setOnMouseClicked(e->ventanaConfirmacion("cancelar Pedido"));
         btnConfirmar.setOnMouseClicked(e->confirmarPedido());
@@ -119,12 +121,12 @@ public class ResumenPedidoController implements Initializable {
                     ventanaConfirmacion("eliminar Sabor");
                 }
                 else{
-                    mensaje.setText("No es posible eliminar mas Sabores de su pedido");
+                    mensaje.setText("No es posible eliminar mas Sabores");
                 }    
             }
             
             if(tipoPedido.startsWith("Topping") || tipoPedido.startsWith("Base")){
-                mensaje.setText("Solo puede eliminar algun sabor de su pedido");
+                mensaje.setText("Solo puede eliminar algun sabor en su pedido");
             }
         });
     }
@@ -134,17 +136,11 @@ public class ResumenPedidoController implements Initializable {
         VBox vb2= new VBox();
         HBox h2=new HBox();
         Label lb=new Label();
-        vb2.setAlignment(Pos.CENTER);
-        h2.setAlignment(Pos.BOTTOM_CENTER);
         Button bConfirmar = new Button("Confirmar");
+        bConfirmar.setStyle("-fx-text-fill: black;-fx-font-weight: bold;-fx-background-color:#ECDD29");
         Button bCancelar = new Button("Cancelar");
-        
-        vb2.getStyleClass().add("fondosPedirPedido");
-        h2.getStyleClass().add("fondosPedirPedido");
-        lb.getStyleClass().add("texto");
-        bConfirmar.getStyleClass().add("botones");
-        bConfirmar.getStyleClass().add("botones");
-              
+        bCancelar.setStyle("-fx-text-fill: black;-fx-font-weight: bold;-fx-background-color:#ECDD29");
+                   
         if(caso=="eliminar Sabor"){
             lb.setText("¿Esta seguro de eliminar el componente?");
             bConfirmar.setOnMouseClicked((MouseEvent e)->{
@@ -152,7 +148,8 @@ public class ResumenPedidoController implements Initializable {
                 vbPedido.getChildren().remove(indiceHB);
                 itemsPedido.remove(indiceHB);
                 mensaje.setText("Sabor eliminado de su pedido");
-                totalPagar.setText("Total a pagar: "+ElegirBaseController.pedido.calcularTotal());
+                
+                totalPagar.setText("Total a pagar: "+df.format(ElegirBaseController.pedido.calcularTotal()));
                 stg1.close();
             });   
         }
@@ -173,9 +170,16 @@ public class ResumenPedidoController implements Initializable {
         bCancelar.setOnMouseClicked((MouseEvent e)->{
             stg1.close();
         }); 
- 
-        h2.getChildren().addAll(bConfirmar,bCancelar);
+        
+       h2.getChildren().addAll(bConfirmar,bCancelar);
+        h2.setAlignment(Pos.CENTER);
+        h2.setSpacing(20);
+        h2.setLayoutX(30);
+        h2.setLayoutX(48);
         vb2.getChildren().addAll(lb,h2);
+        vb2.setAlignment(Pos.CENTER);
+        vb2.setStyle("-fx-background-color:#DF9EF1");
+        vb2.setSpacing(20);
         Scene sc = new Scene(vb2,300,200);
         stg1.initModality(Modality.APPLICATION_MODAL);
         stg1.setScene(sc);
@@ -185,33 +189,38 @@ public class ResumenPedidoController implements Initializable {
     
     
     public void confirmarPedido(){
-        Thread th1 = new Thread(() -> {
-            //Escritura en pedidos.txt
-            try(BufferedWriter bfr = new BufferedWriter(new FileWriter(InicioVentana.pathFiles+"pedidos.txt"))){
-                bfr.write(ElegirBaseController.pedido.writePedido()+"\n");
-            } catch (IOException ex) {
-                System.out.println("FALLO ESCRITURA EN AL ARCHIVO TXT PEDIDOS");
-                System.out.println(ex.getMessage());
-            }
-            //Serializacion del objeto pedido
-            try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(InicioVentana.pathFiles+"pedido"+ElegirBaseController.pedido.getPedido()+".bin"))){
-                oos.writeObject(ElegirBaseController.pedido);
-                VentanaBienvenidaController.pedidosgenerados.add(ElegirBaseController.pedido);
-            }catch (FileNotFoundException fe){
-                System.out.println(fe.getMessage());
-            } catch (IOException ex) {
-                System.out.println("FALLO SERIALIZACION DEL PEDIDO");
-                System.out.println(ex.getMessage());
-            }
-            //cambio de ventana a Ventana Pago
-            try {
-                 InicioVentana.cambiarEscenasPedirPedidos("VentanaPago.fxml",VentanaBienvenidaController.stage1,"Ventana de pago");
-            } catch (IOException ex) {
-               System.out.println(ex.getMessage());
-            }          
+        try(BufferedWriter bfr = new BufferedWriter(new FileWriter(InicioVentana.pathFiles+"pedidos.txt"))){ 
+        bfr.write(ElegirBaseController.pedido.writePedido()+"\n");
+        } catch (IOException ex) {
+            System.out.println("FALLO ESCRITURA EN AL ARCHIVO TXT PEDIDOS");
+            System.out.println(ex.getMessage());
+        }
+
+        Thread th = new Thread(() -> {
+            Platform.runLater(() -> {
+            // aqui nomas falta agregar un true despues de la cadena pedidos.txt para que la informacion nunca se borre
+            // no sabria si ponerlo o no ????
+
+                try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(InicioVentana.pathFiles+"pedido"+ElegirBaseController.pedido.getPedido()+".bin"))){
+                    oos.writeObject(ElegirBaseController.pedido);
+                    VentanaBienvenidaController.pedidosgenerados.add(ElegirBaseController.pedido);
+                }catch (FileNotFoundException fe){
+                    System.out.println(fe.getMessage());
+                } catch (IOException ex) {
+                    System.out.println("FALLO SERIALIZACION DEL PEDIDO");
+                    System.out.println(ex.getMessage());
+                }
+            });
+            
         });
-        th1.setDaemon(true);
-        th1.start();
+        th.setDaemon(true);
+        th.start();
+
+        try {
+            InicioVentana.cambiarEscenasPedirPedidos("VentanaPago.fxml",VentanaBienvenidaController.stage1,"Ventana de pago");
+        } catch (IOException ex) {
+           System.out.println(ex.getMessage());
+        }
     }
     
     

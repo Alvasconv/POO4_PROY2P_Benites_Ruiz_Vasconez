@@ -111,13 +111,7 @@ public class VentanaBienvenidaController implements Initializable {
             public void handle(ActionEvent e) {
                 
                 try {
-//                    FXMLLoader loader = new FXMLLoader(getClass().getResource("Elegirbase.fxml"));
-//                    Parent root = loader.load();
-//
-//                    ElegirBaseController controller = loader.getController();
-//                    stage1 = new Stage();
-//                    stage1.setTitle("Seleccion Base");
-//                    stage1.setScene(new Scene(root));
+
                     InicioVentana.cambiarEscenasPedirPedidos("ElegirBase.fxml",VentanaBienvenidaController.stage1,"Seleccion Base");
 
                     //Cerrar la ventana principal

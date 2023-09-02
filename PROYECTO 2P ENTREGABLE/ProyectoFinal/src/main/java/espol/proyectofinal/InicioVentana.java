@@ -31,7 +31,7 @@ public class InicioVentana extends Application{
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmLoader = new FXMLLoader(InicioVentana.class.getResource("VentanaBienvenida.fxml"));
+        FXMLLoader fxmLoader = new FXMLLoader(InicioVentana.class.getResource("InicioSesion.fxml"));
 
         Parent root = fxmLoader.load();
 

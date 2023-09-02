@@ -40,28 +40,19 @@
 }
 
 
-
 .botones {
   -fx-background-color:#efb810 ;
   -fx-border-radius: 6px;
-  -fx-box-shadow: rgba(0,0,0,0.8), 10, 0, 0, 0;
-  -fx-box-sizing: border-box;
-  -fx-display: inline-block;
   -fx-font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
   -fx-font-size: 13px;
   -fx-font-weight: 800;
   -fx-line-height: 16px;
   -fx-text-align: center;
-  -fx-webkit-user-select: none;
-  -fx-touch-action: manipulation;
-  -fx-vertical-align: middle;
   -fx-min-height:50px;
   -fx-min-width:100px;
 }
 
 .botones:hover{
-  -fx-min-height:55px;
-  -fx-min-width:105px;
   -fx-background-color: #fcea74;
 }
 
