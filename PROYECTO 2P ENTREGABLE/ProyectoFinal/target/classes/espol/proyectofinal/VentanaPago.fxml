@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.SepiaTone?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="rootPago" prefHeight="520.0" prefWidth="700.0" styleClass="rootpedido" stylesheets="@../../FolderCSS/FondosVentanas.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espol.proyectofinal.VentanaPagoController">
+   <children>
+      <Label layoutX="66.0" layoutY="41.0" prefHeight="47.0" prefWidth="98.0" text="Pago" textFill="#e460bf">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+      </Label>
+      <RadioButton fx:id="efectivo" layoutX="68.0" layoutY="105.0" mnemonicParsing="false" text="Efectivo">
+         <toggleGroup>
+            <ToggleGroup fx:id="opciones" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="trjcredito" layoutX="224.0" layoutY="105.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="128.0" text="Tarjeta de credito" toggleGroup="$opciones" />
+      <Button fx:id="btnConfirmar" layoutX="436.0" layoutY="448.0" mnemonicParsing="false" onAction="#confirmar" styleClass="botones" stylesheets="@../../FolderCSS/FondosVentanas.css" text="Confirmar">
+         <effect>
+            <SepiaTone>
+               <input>
+                  <DropShadow />
+               </input>
+            </SepiaTone>
+         </effect>
+      </Button>
+      <Button fx:id="btnCancelar" layoutX="558.0" layoutY="448.0" mnemonicParsing="false" onAction="#cancelar" styleClass="botones" stylesheets="@../../FolderCSS/FondosVentanas.css" text="Cancelar">
+         <effect>
+            <SepiaTone>
+               <input>
+                  <DropShadow />
+               </input>
+            </SepiaTone>
+         </effect></Button>
+      <AnchorPane fx:id="rootDetalles" layoutX="66.0" layoutY="135.0" prefHeight="151.0" prefWidth="396.0">
+         <children>
+            <Label layoutX="7.0" layoutY="1.0" prefHeight="25.0" prefWidth="160.0" text="Detalles de pago:" textFill="#e460bf">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="39.0" layoutY="33.0" text="Valor a pagar" />
+            <Label layoutX="63.0" layoutY="91.0" text="I.V.A" />
+            <Label layoutX="31.0" layoutY="61.0" text="Adicional tarjeta" />
+            <Label layoutX="39.0" layoutY="121.0" text="Total a Pagar" />
+            <TextField fx:id="valor" layoutX="135.0" layoutY="29.0" />
+            <TextField fx:id="valortrj" layoutX="135.0" layoutY="57.0" />
+            <TextField fx:id="iva" layoutX="135.0" layoutY="87.0" />
+            <TextField fx:id="total" layoutX="135.0" layoutY="117.0" />
+         </children>
+      </AnchorPane>
+      <VBox fx:id="hbLabel" layoutX="77.0" layoutY="279.0" prefHeight="162.0" prefWidth="539.0" />
+   </children>
+</AnchorPane>

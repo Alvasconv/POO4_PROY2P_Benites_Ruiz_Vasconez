@@ -6,7 +6,9 @@ package espol.proyectofinal;
 
 import Clases.Pedido;
 import Clases.Sabor;
+import static espol.proyectofinal.VentanaBienvenidaController.g;
 import static espol.proyectofinal.VentanaBienvenidaController.pedidosgenerados;
+import static espol.proyectofinal.VentanaBienvenidaController.stage1;
 import static espol.proyectofinal.VentanaBienvenidaController.vpedidos;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -157,13 +159,14 @@ public class ResumenPedidoController implements Initializable {
         if(caso=="cancelar Pedido"){
             lb.setText("¿Esta seguro de cancelar su compra?");
             bConfirmar.setOnMouseClicked((MouseEvent e)->{
-                ElegirBaseController.pedido=null;
+                ElegirBaseController.pedido=null;              
                 try {
                     InicioVentana.cambiarEscenasPedirPedidos("VentanaBienvenida.fxml",VentanaBienvenidaController.stage1,"Ventana Bienvenida");
                 } catch (IOException ex) {
                    System.out.println(ex.getMessage());
                 }
                 stg1.close();
+                // lo ultimo que podriamos hacer es que se cierre toda la aplicacion xd
             });   
         }
         

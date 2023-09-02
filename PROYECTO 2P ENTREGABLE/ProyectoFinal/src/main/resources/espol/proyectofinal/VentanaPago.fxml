@@ -5,30 +5,47 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.SepiaTone?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="rootPago" prefHeight="500.0" prefWidth="700.0" styleClass="rootpedido" stylesheets="@../../FolderCSS/FondosVentanas.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espol.proyectofinal.VentanaPagoController">
+<AnchorPane id="AnchorPane" fx:id="rootPago" prefHeight="520.0" prefWidth="700.0" styleClass="rootpedido" stylesheets="@../../FolderCSS/FondosVentanas.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espol.proyectofinal.VentanaPagoController">
    <children>
-      <Label layoutX="68.0" layoutY="60.0" prefHeight="47.0" prefWidth="98.0" text="Pago" textFill="#e460bf">
+      <Label layoutX="66.0" layoutY="41.0" prefHeight="47.0" prefWidth="98.0" text="Pago" textFill="#e460bf">
          <font>
-            <Font size="32.0" />
+            <Font name="System Bold" size="32.0" />
          </font>
       </Label>
-      <RadioButton fx:id="efectivo" layoutX="68.0" layoutY="114.0" mnemonicParsing="false" text="Efectivo">
+      <RadioButton fx:id="efectivo" layoutX="68.0" layoutY="105.0" mnemonicParsing="false" text="Efectivo">
          <toggleGroup>
             <ToggleGroup fx:id="opciones" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="trjcredito" layoutX="225.0" layoutY="114.0" mnemonicParsing="false" text="Tarjeta de credito" toggleGroup="$opciones" />
-      <Button fx:id="btnConfirmar" layoutX="453.0" layoutY="448.0" mnemonicParsing="false" onAction="#confirmar" styleClass="botones" stylesheets="@../../FolderCSS/FondosVentanas.css" text="Confirmar" />
-      <Button fx:id="btnCancelar" layoutX="558.0" layoutY="448.0" mnemonicParsing="false" onAction="#cancelar" styleClass="botones" stylesheets="@../../FolderCSS/FondosVentanas.css" text="Cancelar" />
+      <RadioButton fx:id="trjcredito" layoutX="224.0" layoutY="105.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="128.0" text="Tarjeta de credito" toggleGroup="$opciones" />
+      <Button fx:id="btnConfirmar" layoutX="436.0" layoutY="448.0" mnemonicParsing="false" onAction="#confirmar" styleClass="botones" stylesheets="@../../FolderCSS/FondosVentanas.css" text="Confirmar">
+         <effect>
+            <SepiaTone>
+               <input>
+                  <DropShadow />
+               </input>
+            </SepiaTone>
+         </effect>
+      </Button>
+      <Button fx:id="btnCancelar" layoutX="558.0" layoutY="448.0" mnemonicParsing="false" onAction="#cancelar" styleClass="botones" stylesheets="@../../FolderCSS/FondosVentanas.css" text="Cancelar">
+         <effect>
+            <SepiaTone>
+               <input>
+                  <DropShadow />
+               </input>
+            </SepiaTone>
+         </effect></Button>
       <AnchorPane fx:id="rootDetalles" layoutX="66.0" layoutY="135.0" prefHeight="151.0" prefWidth="396.0">
          <children>
-            <Label layoutX="12.0" layoutY="10.0" prefHeight="25.0" prefWidth="160.0" text="Detalles de pago:" textFill="#e460bf">
+            <Label layoutX="7.0" layoutY="1.0" prefHeight="25.0" prefWidth="160.0" text="Detalles de pago:" textFill="#e460bf">
                <font>
-                  <Font size="13.0" />
+                  <Font name="System Bold" size="15.0" />
                </font>
             </Label>
             <Label layoutX="39.0" layoutY="33.0" text="Valor a pagar" />
@@ -41,6 +58,6 @@
             <TextField fx:id="total" layoutX="135.0" layoutY="117.0" />
          </children>
       </AnchorPane>
-      <VBox fx:id="hbLabel" layoutX="100.0" layoutY="279.0" prefHeight="164.0" prefWidth="516.0" />
+      <VBox fx:id="hbLabel" layoutX="77.0" layoutY="279.0" prefHeight="162.0" prefWidth="539.0" />
    </children>
 </AnchorPane>

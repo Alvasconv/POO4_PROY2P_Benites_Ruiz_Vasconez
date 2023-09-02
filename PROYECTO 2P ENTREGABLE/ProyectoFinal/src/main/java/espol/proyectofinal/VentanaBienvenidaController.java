@@ -63,8 +63,8 @@ public class VentanaBienvenidaController implements Initializable {
         lbienvenida.setText(lbienvenida.getText()+", "+usuario);
         
 //      estos son solo ejemplos de prueba para ver si mi ventana se actualizaba constantemente
-        pedidosgenerados.add(new Pedido("Alex"));
-        pedidosgenerados.add(new Pedido("Benites"));
+        pedidosgenerados.add(new Pedido("Neymar"));
+        pedidosgenerados.add(new Pedido("Iron Man"));
         pedidosgenerados.add(new Pedido("Messi"));
         pedidosgenerados.add(new Pedido("Ronaldo"));
         
@@ -134,7 +134,8 @@ public class VentanaBienvenidaController implements Initializable {
 //    -------- este metodo hace que se abra la ventana que se actualiza en vivo cuando llega un nuevo pedido -------
 //    -------- y la invoco dentro de mi metodo handle del metodo mostrar pedido de esta clase 
     
-    public void ventanaGenerarPedidos(){
+    //public void ventanaGenerarPedidos(){
+    public static void ventanaGenerarPedidos(){    
         lviewPedidos.setPrefWidth(300);
         lviewPedidos.setPrefHeight(250);
         
@@ -151,7 +152,9 @@ public class VentanaBienvenidaController implements Initializable {
         g.show();
     }
     
-    public void actualizarVentanaPedidos(){
+    //public void actualizarVentanaPedidos(){
+    public static void actualizarVentanaPedidos(){
+        
         Thread backgroundthread = new Thread(new Runnable() {
 
             public void run() {
