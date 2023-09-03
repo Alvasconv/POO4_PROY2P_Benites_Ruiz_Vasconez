@@ -22,13 +22,23 @@ import javafx.stage.Stage;
  */
 public class InicioVentana extends Application{
     
+    /**
+     * Ruta de la ubicacion de los archivos tipo .txt y .bin usados en el programa.
+     */
     public static String pathFiles = "src/main/resources/Files/";
+    /**
+     * Ruta de la ubicaion de las imagenes usadas en el programa.
+     */
     public static String pathPhotos = "src/main/resources/photos/";
+    
     
     private static Scene scene;
     
-   
-
+    /**
+     *Metodo start.
+     * @param stage stage
+     * @throws Exception throws Exception
+     */
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader fxmLoader = new FXMLLoader(InicioVentana.class.getResource("InicioSesion.fxml"));
@@ -43,15 +53,28 @@ public class InicioVentana extends Application{
         stage.show();
 
     }
-    //Esto solo funciona para las ventanas de la opcion Pedir Pedido
-    static void cambiarEscenasPedirPedidos(String nuevaEscena,Stage stage,String titulo) throws IOException {
+    /**
+     * Cambia las escenas del metodo pedir pedido.
+     * @param nuevaEscena nombre del archivo
+     * @param stage stage donde se abre la nueva escena
+     * @param titulo titulo del stage
+     * @throws IOException  throws IOException
+     */
+    public static void cambiarEscenasPedirPedidos(String nuevaEscena,Stage stage,String titulo) throws IOException {
         FXMLLoader loader = new FXMLLoader(VentanaBienvenidaController.class.getResource(nuevaEscena));
         Parent root = loader.load();            
         //ElegirSaboresController controller = loader.getController();
         stage.setTitle(titulo);
         stage.setScene(new Scene(root,700,520));
     }
-    
+    /**
+     * Metodo que permite cargar una imagen en un objeto ImageView previamente
+     * creado para ser mostrado en el programa.
+     * @param imgv Objeto de javaFx tipo ImageView donde se carga la imagen.
+     * @param foto nombre de la foto a ser cargada.
+     * @param x tamaño de la foto en el eje horizontal.
+     * @param y tamaño de la foto en el eje vertical.
+     */
     public static void insertarImagen(ImageView imgv, String foto, int x, int y){
         try(FileInputStream input = new FileInputStream(InicioVentana.pathPhotos+foto)){
             Image img = new Image(input,x,y,false,false);
@@ -62,7 +85,10 @@ public class InicioVentana extends Application{
         }
     }
     
-
+    /**
+     * Metodo main que da inicio al programa con el metodo launch().
+     * @param args argumentos.
+     */
     public static void main(String[] args) {
         launch();
     }

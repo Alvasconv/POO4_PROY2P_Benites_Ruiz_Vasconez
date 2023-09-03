@@ -72,7 +72,11 @@ public class ElegirToppingsController implements Initializable {
     
     double sumaTotal=0;
     
-
+    /**
+     *Initialize.
+     * @param url url
+     * @param rb rb
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cbGrupoL = new ArrayList<>(Arrays.asList(topping1, topping2, topping3, topping4, topping5, topping6,
@@ -85,6 +89,11 @@ public class ElegirToppingsController implements Initializable {
         }
     }    
     
+    /**
+     * Lee los datos del archivo toppings.txt, crea objetos de tipo Topping, carga sus
+     * valores en los objetos que se muestran en el programa y en un ArrayList de
+     * tipo Topping.
+     */
     public void rellenarCheckBoxes(){
         try(BufferedReader archivo = new BufferedReader(new FileReader(InicioVentana.pathFiles+"toppings.txt"))){
             String datos;
@@ -126,7 +135,9 @@ public class ElegirToppingsController implements Initializable {
         }
     };
    
-    
+    /**
+     * Cambia de la escena actual a la de Resumen Pedido.
+     */
     public void continuar(){
         btnContinuar.setOnAction((ActionEvent e) -> {
             try {

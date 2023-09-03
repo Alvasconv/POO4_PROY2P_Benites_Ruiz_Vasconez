@@ -43,6 +43,8 @@ public class VentanaCierreController implements Initializable {
     private ImageView imfinal;
     /**
      * Initializes the controller class.
+     * @param url url
+     * @param rb rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -67,7 +69,9 @@ public class VentanaCierreController implements Initializable {
         iniciarTarea();
         
     }    
-    
+    /**
+     * Realiza el conteo regresivo en que se cierra automaticamente la ventana.
+     */
     public void ejecutarTarea(){
         
         
@@ -99,7 +103,9 @@ public class VentanaCierreController implements Initializable {
         }
         Platform.exit();
     } 
-    
+    /**
+     * Ejecuta el conteo regresivo.
+     */
     public void iniciarTarea(){
         
         Thread threadconteo=new Thread(new Runnable(){

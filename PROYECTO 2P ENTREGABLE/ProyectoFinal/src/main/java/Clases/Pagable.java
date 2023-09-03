@@ -10,8 +10,16 @@ package Clases;
  */
 public interface Pagable {
     
+    /**
+     *generarTransaccionE
+     * @return pago
+     */
     public abstract Pago generarTransaccionE();
     
+    /**
+     *generarTransaccionT
+     * @return pago
+     */
     public abstract Pago generarTransaccionT();
     
 }

@@ -95,12 +95,18 @@ public class VentanaPagoController implements Initializable {
 
     @FXML
     private VBox hbLabel;
-
+    /**
+     * Initialize
+     * @param url url
+     * @param rb rb
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         detallarPago();
     }
-
+    /**
+     * Detalla el pago generado por el pedido del cliente.
+     */
     public void detallarPago() {
         Pago p = ElegirBaseController.pedido.generarTransaccionE();
         valor.setText(Double.toString(Math.round(p.getValorSinAdiciones()*100.0)/100.0));
@@ -177,7 +183,10 @@ public class VentanaPagoController implements Initializable {
             }
         });
     }
-
+    /**
+     * Metodo encargado de procesar el pago del pedido una vez el cliente de click
+     * en el boton confirmar.
+     */
     @FXML
     public void confirmar() {
 
@@ -197,7 +206,7 @@ public class VentanaPagoController implements Initializable {
             } else {
                 // aqui nomas falta agregar un true despues de la cadena pedidos.txt para que la informacion nunca se borre
                 // no sabria si ponerlo o no ????
-                try (BufferedWriter br = new BufferedWriter(new FileWriter(InicioVentana.pathFiles + "pagos.txt"))) {
+                try (BufferedWriter br = new BufferedWriter(new FileWriter(InicioVentana.pathFiles + "pagos.txt",true))) {
                     br.write(ElegirBaseController.pedido.generarTransaccionT().writePago() + "\n");
                 } catch (IOException e) {
                     System.out.println("FALLO ESCRITURA EN AL ARCHIVO TXT PAGOS");
@@ -212,7 +221,7 @@ public class VentanaPagoController implements Initializable {
 
         } else if (efectivo.isSelected()) {
 
-            try (BufferedWriter br = new BufferedWriter(new FileWriter(InicioVentana.pathFiles + "pagos.txt"))) {
+            try (BufferedWriter br = new BufferedWriter(new FileWriter(InicioVentana.pathFiles + "pagos.txt",true))) {
                 br.write(ElegirBaseController.pedido.generarTransaccionE().writePago() + "\n");
             } catch (IOException e) {
                 System.out.println("FALLO ESCRITURA EN AL ARCHIVO TXT PAGOS");
@@ -234,7 +243,10 @@ public class VentanaPagoController implements Initializable {
         }
 
     }
-
+    /**
+     * Crea una alerta al usuario e indica que error esta cometiendo.
+     * @param mensaje 
+     */
     private void mostrarError(String mensaje) {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Error");
@@ -243,6 +255,10 @@ public class VentanaPagoController implements Initializable {
         alert.showAndWait();
     }
 
+    /**
+     * Metodo ligado al boton cancelar. Cierra la ventana de pago y elimina el pedido
+     * del archivo pedidos.txt y su archivo .bin.
+     */
     @FXML
     public void cancelar() {
         /*
@@ -297,7 +313,9 @@ public class VentanaPagoController implements Initializable {
         stg1.setTitle("Cancelar pedido ");
         stg1.show();
     }
-
+    /**
+     * Al ser cancelado un pedido en la ventana pago, lo elimina del archivo pedidos.txt.
+     */
     public void eliminartxt() {
         ArrayList<String> lineas = new ArrayList<>();
         try (BufferedReader bfr = new BufferedReader(new FileReader(InicioVentana.pathFiles + "pedidos.txt"))) {
@@ -323,6 +341,9 @@ public class VentanaPagoController implements Initializable {
         }
     }
 
+    /**
+     * Al ser cancelado un pedido en la ventana pago, elimina su archivo serializado tipo .bin.
+     */
     public void eliminarbin() {
         ArrayList<Pedido> pediSeri = new ArrayList<>();
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(InicioVentana.pathFiles + "pedido" + ElegirBaseController.pedido.getPedido() + ".bin"))) {

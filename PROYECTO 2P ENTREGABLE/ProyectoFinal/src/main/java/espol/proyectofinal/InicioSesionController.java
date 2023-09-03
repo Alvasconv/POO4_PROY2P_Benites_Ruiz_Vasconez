@@ -38,11 +38,19 @@ import javafx.stage.Stage;
  */
 public class InicioSesionController implements Initializable {
 
+    /**
+     * ArrayList de tipo Usuario que almacena todos los usuarios que pueden
+     * acceder al programa.
+     */
     public static ArrayList<Usuario> lstusuarios = new ArrayList<>();
-    public static ArrayList<Base> lstbases = new ArrayList<>();
-    public static ArrayList<Sabor> lstsabores = new ArrayList<>();
-    public static ArrayList<Topping> lsttoppings = new ArrayList<>();
+//    public static ArrayList<Base> lstbases = new ArrayList<>();
+//    public static ArrayList<Sabor> lstsabores = new ArrayList<>();
+//    public static ArrayList<Topping> lsttoppings = new ArrayList<>();
+    /**
+     * Nombre del usuario que ha ingresado en el sistema.
+     */
     public static String usuario = "";
+    
     @FXML
     private TextField txusuario;
     @FXML
@@ -58,17 +66,22 @@ public class InicioSesionController implements Initializable {
     //public static ArrayList<Usuario> lstusuario = new ArrayList<>();
     /**
      * Initializes the controller class.
+     * @param url url
+     * @param rb rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cargarUsuarios();
-        cargarBases();
-        cargarSabores();
-        cargarTopping();
+//        cargarBases();
+//        cargarSabores();
+//        cargarTopping();
         
         
     }   
-    
+    /**
+     * Lee el archivo usuarios.txt, crea los usuarios y los añade a un ArrayList
+     * de tipo Usuario.
+     */
     public void cargarUsuarios(){
         try(BufferedReader br = new BufferedReader(new FileReader(InicioVentana.pathFiles+"usuarios.txt",StandardCharsets.UTF_8))){
             String linea= br.readLine();
@@ -86,57 +99,57 @@ public class InicioSesionController implements Initializable {
         }
     }
     
-    public void cargarBases(){
-        try(BufferedReader br = new BufferedReader(new FileReader(InicioVentana.pathFiles+"bases.txt",StandardCharsets.UTF_8))){
-            String linea= br.readLine();
-            while (linea != null) {
-                //System.out.println(linea);
-                String p[]=linea.split(",");
-                lstbases.add(new Base(p[0].trim(),Double.valueOf(p[1])));
-                linea= br.readLine();
-            }
-            
-        }catch(FileNotFoundException ex){
-            System.out.println("No se pudo encontrar el archivo");
-        }catch(IOException e){
-            System.out.println("ERROOOORRR.......");
-        }
-    }
-    
-    public void cargarSabores(){
-        try(BufferedReader br = new BufferedReader(new FileReader(InicioVentana.pathFiles+"sabores.txt",StandardCharsets.UTF_8))){
-            String linea= br.readLine();
-            while (linea != null) {
-                //System.out.println(linea);
-                String p[]=linea.split(",");
-                lstsabores.add(new Sabor(p[0].trim(),Double.valueOf(p[1])));
-                linea= br.readLine();
-            }
-            
-        }catch(FileNotFoundException ex){
-            System.out.println("No se pudo encontrar el archivo");
-        }catch(IOException e){
-            System.out.println("ERROOOORRR.......");
-        }
-    }
-    
-    
-    public void cargarTopping(){
-        try(BufferedReader br = new BufferedReader(new FileReader(InicioVentana.pathFiles+"toppings.txt",StandardCharsets.UTF_8))){
-            String linea= br.readLine();
-            while (linea != null) {
-                //System.out.println(linea);
-                String p[]=linea.split(",");
-                lsttoppings.add(new Topping(p[0].trim(),Double.valueOf(p[1])));
-                linea= br.readLine();
-            }
-            
-        }catch(FileNotFoundException ex){
-            System.out.println("No se pudo encontrar el archivo");
-        }catch(IOException e){
-            System.out.println("ERROOOORRR.......");
-        }
-    }
+//    public void cargarBases(){
+//        try(BufferedReader br = new BufferedReader(new FileReader(InicioVentana.pathFiles+"bases.txt",StandardCharsets.UTF_8))){
+//            String linea= br.readLine();
+//            while (linea != null) {
+//                //System.out.println(linea);
+//                String p[]=linea.split(",");
+//                lstbases.add(new Base(p[0].trim(),Double.valueOf(p[1])));
+//                linea= br.readLine();
+//            }
+//            
+//        }catch(FileNotFoundException ex){
+//            System.out.println("No se pudo encontrar el archivo");
+//        }catch(IOException e){
+//            System.out.println("ERROOOORRR.......");
+//        }
+//    }
+//    
+//    public void cargarSabores(){
+//        try(BufferedReader br = new BufferedReader(new FileReader(InicioVentana.pathFiles+"sabores.txt",StandardCharsets.UTF_8))){
+//            String linea= br.readLine();
+//            while (linea != null) {
+//                //System.out.println(linea);
+//                String p[]=linea.split(",");
+//                lstsabores.add(new Sabor(p[0].trim(),Double.valueOf(p[1])));
+//                linea= br.readLine();
+//            }
+//            
+//        }catch(FileNotFoundException ex){
+//            System.out.println("No se pudo encontrar el archivo");
+//        }catch(IOException e){
+//            System.out.println("ERROOOORRR.......");
+//        }
+//    }
+//    
+//    
+//    public void cargarTopping(){
+//        try(BufferedReader br = new BufferedReader(new FileReader(InicioVentana.pathFiles+"toppings.txt",StandardCharsets.UTF_8))){
+//            String linea= br.readLine();
+//            while (linea != null) {
+//                //System.out.println(linea);
+//                String p[]=linea.split(",");
+//                lsttoppings.add(new Topping(p[0].trim(),Double.valueOf(p[1])));
+//                linea= br.readLine();
+//            }
+//            
+//        }catch(FileNotFoundException ex){
+//            System.out.println("No se pudo encontrar el archivo");
+//        }catch(IOException e){
+//            System.out.println("ERROOOORRR.......");
+//        }
+//    }
 
     @FXML
     private void inicaSesion(ActionEvent event) {
@@ -160,9 +173,11 @@ public class InicioSesionController implements Initializable {
                                 stage.setScene(new Scene(root));
 
                                 // Cerrar la ventana principal
-                                Stage primaryStage = (Stage) btsesion.getScene().getWindow();
-                                primaryStage.close();
-                                stage.show();
+                                if(((Stage) btsesion.getScene().getWindow())!=null){   
+                                    Stage primaryStage = (Stage) btsesion.getScene().getWindow();
+                                    primaryStage.close();
+                                    stage.show();
+                                }
 
                             } catch (IOException ex) {
                                 ex.printStackTrace();

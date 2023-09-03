@@ -49,13 +49,19 @@ public class LocalesController implements Initializable {
     private Pane rootlocales;
     /**
      * Initializes the controller class.
+     * @param url url
+     * @param rb rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
         mostrarLocales();
     }    
-    
+    /**
+     * Metodo que carga los datos de locales.txt y crea un ArrayList de tipo Local
+     * y lo devuelve.
+     * @return lstlocales
+     */
     public static ArrayList<Local> cargarLocales(){
         ArrayList<Local> lstlocales = new ArrayList<>();
         
@@ -77,7 +83,9 @@ public class LocalesController implements Initializable {
 
         return lstlocales;
     }
-    
+    /**
+     * Muestra en el mapa una figurita sobre la ubicacion de los locales.
+     */
     public  void mostrarLocales(){
         Thread threadMuestraUbicacion = new Thread(new Runnable() {
             public void run() {
@@ -214,8 +222,12 @@ public class LocalesController implements Initializable {
 //            
 //        }
     }
-    
-    // este es un metodo para crear la ventana pop up con la descripcion del lugar y que se cierre despues de 5 segundos
+
+    /**
+     * Este es un metodo para crear la ventana pop up con la descripcion del lugar y que se cierre despues de 5 segundos.
+     * @param l objeto de javaFx tipo Label.
+     * @param st Stage donde se abre la nueva ventana.
+     */
      public void CierreventanaInfo(Label l,Stage st){
         
         Thread threadconteo=new Thread(new Runnable(){

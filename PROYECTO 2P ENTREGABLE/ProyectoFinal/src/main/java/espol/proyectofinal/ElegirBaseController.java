@@ -64,8 +64,13 @@ public class ElegirBaseController implements Initializable {
     ArrayList<ToggleButton> tgBotones = new ArrayList<>();
     Base baseSeleccionada;
     
-    static Pedido pedido;
+    public static Pedido pedido;
 
+    /**
+     *Initialize.
+     * @param url url
+     * @param rb rb
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
@@ -76,6 +81,11 @@ public class ElegirBaseController implements Initializable {
         continuar();
     }    
     
+    /**
+     * Lee los datos del archivo bases.txt, crea objetos de tipo Base, carga sus
+     * valores en los objetos que se muestran en el programa y en un ArrayList de
+     * tipo Base.
+     */
     public void leerDatosBase(){
         try(BufferedReader archivo = new BufferedReader(new FileReader(InicioVentana.pathFiles+"bases.txt"))){
             String datos;
@@ -132,7 +142,9 @@ public class ElegirBaseController implements Initializable {
         }
     };
      
-    
+    /**
+     * Cambia de la escena actual a la de Elegir Sabores.
+     */
     public void continuar(){
         btnContinuar.setOnAction((ActionEvent e) -> {
             

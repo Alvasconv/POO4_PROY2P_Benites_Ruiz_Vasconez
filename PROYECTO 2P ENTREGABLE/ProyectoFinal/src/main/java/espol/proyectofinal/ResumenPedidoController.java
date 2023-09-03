@@ -4,12 +4,8 @@
  */
 package espol.proyectofinal;
 
-import Clases.Pedido;
-import Clases.Sabor;
-import static espol.proyectofinal.VentanaBienvenidaController.g;
-import static espol.proyectofinal.VentanaBienvenidaController.pedidosgenerados;
-import static espol.proyectofinal.VentanaBienvenidaController.stage1;
-import static espol.proyectofinal.VentanaBienvenidaController.vpedidos;
+import Clases.*;
+import static espol.proyectofinal.VentanaBienvenidaController.*;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -66,6 +62,11 @@ public class ResumenPedidoController implements Initializable {
     int indiceHB;
     DecimalFormat df = new DecimalFormat("0.00");
     
+    /**
+     * Initialize
+     * @param url url
+     * @param rb rb
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         llenar();
@@ -75,11 +76,13 @@ public class ResumenPedidoController implements Initializable {
         totalPagar.setText("Total a pagar: "+df.format(ElegirBaseController.pedido.calcularTotal()));
         eliminar();
         btnCancelar.setOnMouseClicked(e->ventanaConfirmacion("cancelar Pedido"));
-        btnConfirmar.setOnMouseClicked(e->confirmarPedido());
-        
-             
+        btnConfirmar.setOnMouseClicked(e->confirmarPedido());       
     }
     
+    /**
+     * Carga los datos de cada componente ordenado en el pedido y mostrados en la
+     * ventana de Resumen Pedido.
+     */
     public void llenar(){
         for(String s:ElegirBaseController.pedido.detallarPedido()){
             HBox hb = new HBox();
@@ -91,6 +94,7 @@ public class ResumenPedidoController implements Initializable {
             vbPedido.getChildren().add(hb);
         }
     }
+    
     //Agrupa todos los vboxes de cada detalle del pedido
     EventHandler evvb = (EventHandler<MouseEvent>) (MouseEvent e) -> {
         mensaje.setText("");
@@ -106,6 +110,10 @@ public class ResumenPedidoController implements Initializable {
         }
     };
     
+    /**
+     * Metodo usado a travez del boton Eliminar, reconoce si hay 1 0 2 sabores
+     * en pedido, solo si hay 2 permite al usuario eliminarlo.
+     */
     public void eliminar(){
         btnEliminar.setOnMouseClicked((MouseEvent e)->{
             String tipoPedido = ((Label)itemsPedido.get(indiceHB).getChildren().get(0)).getText();
@@ -133,6 +141,12 @@ public class ResumenPedidoController implements Initializable {
         });
     }
     
+    /**
+     * Ventana de confirmacion ligado a los botones eliminar y cancelar de la ventana
+     * Resumen Pedido, dependiendo del caso se realizara la accion al dar click en el boton
+     * confirmar de la ventana emergente.
+     * @param caso Tipos de casos aceptados(eliminar Sabor / cancelar Pedido)
+     */
     public void ventanaConfirmacion(String caso){
         Stage stg1 = new Stage();
         VBox vb2= new VBox();
@@ -190,34 +204,35 @@ public class ResumenPedidoController implements Initializable {
         stg1.show();
     }
     
-    
+    /**
+     * Metodo ligado al boton confirmar de la ventana Resumen Pedido, da paso a la
+     * Ventana Pago, serializa el pedido y lo escribe en el archivo pedidod.txt.
+     */
     public void confirmarPedido(){
-        try(BufferedWriter bfr = new BufferedWriter(new FileWriter(InicioVentana.pathFiles+"pedidos.txt"))){ 
+        try(BufferedWriter bfr = new BufferedWriter(new FileWriter(InicioVentana.pathFiles+"pedidos.txt",true))){ 
         bfr.write(ElegirBaseController.pedido.writePedido()+"\n");
         } catch (IOException ex) {
             System.out.println("FALLO ESCRITURA EN AL ARCHIVO TXT PEDIDOS");
             System.out.println(ex.getMessage());
         }
 
-        Thread th = new Thread(() -> {
-            Platform.runLater(() -> {
-            // aqui nomas falta agregar un true despues de la cadena pedidos.txt para que la informacion nunca se borre
-            // no sabria si ponerlo o no ????
-
-                try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(InicioVentana.pathFiles+"pedido"+ElegirBaseController.pedido.getPedido()+".bin"))){
-                    oos.writeObject(ElegirBaseController.pedido);
+        Thread th = new Thread(new Runnable(){
+            @Override
+            public void run(){
+                try(ObjectOutputStream oos2 = new ObjectOutputStream(new FileOutputStream(InicioVentana.pathFiles+"pedido"+ElegirBaseController.pedido.getPedido()+".bin"))){
+                    oos2.writeObject(ElegirBaseController.pedido);
                     VentanaBienvenidaController.pedidosgenerados.add(ElegirBaseController.pedido);
-                }catch (FileNotFoundException fe){
-                    System.out.println(fe.getMessage());
                 } catch (IOException ex) {
                     System.out.println("FALLO SERIALIZACION DEL PEDIDO");
                     System.out.println(ex.getMessage());
                 }
-            });
-            
+            }
         });
         th.setDaemon(true);
         th.start();
+        
+        System.out.println("ESTADO: "+th.getState());
+        
 
         try {
             InicioVentana.cambiarEscenasPedirPedidos("VentanaPago.fxml",VentanaBienvenidaController.stage1,"Ventana de pago");

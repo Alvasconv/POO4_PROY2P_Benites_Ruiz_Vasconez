@@ -51,6 +51,11 @@ public class ElegirSaboresController implements Initializable {
     ArrayList<Sabor> sabores= new ArrayList<>();
     ArrayList<ComboBox> cBoxes= new ArrayList<>();
     
+    /**
+     *Initialize.
+     * @param url url
+     * @param rb rb
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cBoxes.add(sabor1);
@@ -62,6 +67,11 @@ public class ElegirSaboresController implements Initializable {
         }
     }
     
+    /**
+     * Lee los datos del archivo sabores.txt, crea objetos de tipo Sabor, carga sus
+     * valores en los objetos que se muestran en el programa y en un ArrayList de
+     * tipo Sabor.
+     */
     public void leerDatosComboBox(){
         try(BufferedReader archivo = new BufferedReader(new FileReader(InicioVentana.pathFiles+"sabores.txt"))){
             String datos;
@@ -113,7 +123,9 @@ public class ElegirSaboresController implements Initializable {
         }
     };
     
-    
+    /**
+     * Cambia de la escena actual a la de Elegir Toppings.
+     */
     public void continuar(){
         btnContinuar.setOnAction((ActionEvent e) -> {
             

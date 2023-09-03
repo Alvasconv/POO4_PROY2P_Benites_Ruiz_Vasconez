@@ -38,9 +38,21 @@ import javafx.stage.Stage;
 public class VentanaBienvenidaController implements Initializable {
     // utilizar este arraylist para aqui agregar los pedidos que se vayan generando; recordar que la clase pedido tiene
     // varios constructores y cualquiera de estos puede recibir este arraylist pedidosgenerados
+    /**
+     * Utilizar este arraylist para aqui agregar los pedidos que se vayan generando.
+     */
     public static ArrayList<Pedido> pedidosgenerados = new ArrayList<>();
+    /**
+     * ListView de los pedidos generados en el programa.
+     */
     public static ListView<Pedido> lviewPedidos = new ListView<>();
+    /**
+     * VBox donde se muestran los pedidos generados.
+     */
     public static VBox vpedidos = new VBox ();
+    /**
+     * Stage de la ventana emergente de los pedidos generados.
+     */
     public static Stage g = new Stage();
     //public static int idpedido =0;
     //public static Pane rootNuevo = new Pane();
@@ -53,10 +65,15 @@ public class VentanaBienvenidaController implements Initializable {
     private Button btpedido;
     @FXML
     private Label lbienvenida;
+    /**
+     * Stage usado para abrir la ventana de Elegir Base.
+     */
     public static Stage stage1 = new Stage();
 
     /**
      * Initializes the controller class.
+     * @param url url
+     * @param rb rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -71,7 +88,10 @@ public class VentanaBienvenidaController implements Initializable {
         
         
     }    
-
+    /**
+     * Muetra los locales
+     * @param event Tipo ActionEvent
+     */
     @FXML
     private void mostrarLocales(ActionEvent event) {
         btlocales.setOnAction(new EventHandler<ActionEvent>() {
@@ -102,7 +122,10 @@ public class VentanaBienvenidaController implements Initializable {
 
     }
     
-
+    /**
+     * Da paso al usuario a realizar un pedido dirigiendolo a la venta de Elegir Base.
+     * @param event Tipo ActionEvent
+     */
     @FXML
     private void realizapedido(ActionEvent event) {
         
@@ -135,6 +158,9 @@ public class VentanaBienvenidaController implements Initializable {
 //    -------- y la invoco dentro de mi metodo handle del metodo mostrar pedido de esta clase 
     
     //public void ventanaGenerarPedidos(){
+    /**
+     * Permite que se abra la ventana emergente que se actualiza en vivo cuando llega un nuevo pedido.
+     */
     public static void ventanaGenerarPedidos(){    
         lviewPedidos.setPrefWidth(300);
         lviewPedidos.setPrefHeight(250);
@@ -153,6 +179,9 @@ public class VentanaBienvenidaController implements Initializable {
     }
     
     //public void actualizarVentanaPedidos(){
+    /**
+     * Metodo encargado de realizar la actualizacion de la ventana de pedidos generados.
+     */
     public static void actualizarVentanaPedidos(){
         
         Thread backgroundthread = new Thread(new Runnable() {
