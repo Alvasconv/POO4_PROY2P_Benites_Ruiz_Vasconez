@@ -31,7 +31,7 @@ public class InicioVentana extends Application{
      */
     public static String pathPhotos = "src/main/resources/photos/";
     
-    
+    //Stage st = InicioSesionController.primaryStage;
     private static Scene scene;
     
     /**

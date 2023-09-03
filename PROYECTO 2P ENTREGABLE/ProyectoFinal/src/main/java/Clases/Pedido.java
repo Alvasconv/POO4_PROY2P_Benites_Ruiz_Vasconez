@@ -4,10 +4,17 @@
  */
 package Clases;
 
+import espol.proyectofinal.InicioVentana;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  *
@@ -20,7 +27,6 @@ public class Pedido implements Serializable,Pagable {
     private ArrayList<Topping> toppings;
     private double total;
     private String nombre;
-    private static int pedidoNum = 1;
 
     /**
      * Constructor Pedido
@@ -30,7 +36,7 @@ public class Pedido implements Serializable,Pagable {
      * @param nombre String nombre
      */
     public Pedido(Base base, ArrayList<Sabor> sabores, ArrayList<Topping> toppings, String nombre) {
-        this.pedido = pedidoNum++;
+        this.pedido = numPedidos()+1;
         this.base = base;
         this.sabores = sabores;
         this.toppings = toppings;
@@ -44,7 +50,7 @@ public class Pedido implements Serializable,Pagable {
      * @param nombre nombre
      */
     public Pedido(String nombre) {
-        this.pedido = pedidoNum++;
+        this.pedido = numPedidos()+1;
         this.nombre = nombre;
     }
     
@@ -53,7 +59,7 @@ public class Pedido implements Serializable,Pagable {
      * @param base base
      */
     public Pedido(Base base) {
-        this.pedido = pedidoNum++;
+        this.pedido = numPedidos()+1;
         this.base = base;
         this.sabores = null;
         this.toppings = null;
@@ -95,7 +101,7 @@ public class Pedido implements Serializable,Pagable {
 
     /**
      *getPedido
-     * @return pedido
+     * @return numero del pedido
      */
     public int getPedido() {
         return pedido;
@@ -232,6 +238,77 @@ public class Pedido implements Serializable,Pagable {
         double t=valor+adicional+iva;
         Pago p=new Pago(idpedido,n ,t,iva,adicional,valor, fechaActual ,tipo);
         return p;
+    }
+
+    /**
+     * Metodo equals
+     * @param pe objeto comparado
+     * @return boolean
+     */
+    @Override
+    public boolean equals(Object pe) {
+        if (pe==null){
+            return false;
+        }
+        if (pe.getClass() != this.getClass()){
+            return false;
+        }
+        final Pedido p = (Pedido) pe;
+        return (p.pedido==this.pedido && p.nombre==this.nombre && p.total==this.total);
+    }
+
+    /**
+     * hashCode
+     * @return hash
+     */
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + this.pedido;
+        hash = 79 * hash + (int) (Double.doubleToLongBits(this.total) ^ (Double.doubleToLongBits(this.total) >>> 32));
+        hash = 79 * hash + Objects.hashCode(this.nombre);
+        return hash;
+    }
+    
+    /**
+     * Devuelve el valor mas alto en los numeros de pedidos registrados en pedidos.txt.
+     * @return indPedidos
+     */
+    public static int numPedidos(){
+        int indPedidos = 0;
+        try(BufferedReader bfr = new BufferedReader(new FileReader(InicioVentana.pathFiles + "pedidos.txt"))){
+            String datos;
+            while((datos=bfr.readLine())!=null){
+                String[] elementos = datos.split(",");
+                int ind = Integer.parseInt(elementos[0]);
+                if(indPedidos<=ind){
+                    indPedidos=ind;
+                }
+            }
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return indPedidos;
+    }
+
+    /**
+     * Genera una lista de tipo pedido con todos los pedidos registrados en el sistema que han
+     * sigo seralizados, los deserializa y los añade al ArrayList.
+     * @return pedidos
+     */
+    public static ArrayList<Pedido> pedidosGenerados(){
+        ArrayList<Pedido> pedidos = new ArrayList<>();
+        
+        for(int i=1;i<=Pedido.numPedidos();i++){
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(InicioVentana.pathFiles + "pedido" +i+ ".bin"))) {
+                Pedido p = (Pedido) ois.readObject();
+                pedidos.add(p);
+            } catch (IOException | ClassNotFoundException ex) {
+                System.out.println(ex.getMessage());
+                System.out.println("No hay archivo de pedido "+i+".bin");
+            }
+        }
+        return pedidos;
     }
 }
 

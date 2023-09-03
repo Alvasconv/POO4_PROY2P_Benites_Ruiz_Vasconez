@@ -221,9 +221,8 @@ public class ResumenPedidoController implements Initializable {
             public void run(){
                 try(ObjectOutputStream oos2 = new ObjectOutputStream(new FileOutputStream(InicioVentana.pathFiles+"pedido"+ElegirBaseController.pedido.getPedido()+".bin"))){
                     oos2.writeObject(ElegirBaseController.pedido);
-                    VentanaBienvenidaController.pedidosgenerados.add(ElegirBaseController.pedido);
+                    
                 } catch (IOException ex) {
-                    System.out.println("FALLO SERIALIZACION DEL PEDIDO");
                     System.out.println(ex.getMessage());
                 }
             }
@@ -231,11 +230,9 @@ public class ResumenPedidoController implements Initializable {
         th.setDaemon(true);
         th.start();
         
-        System.out.println("ESTADO: "+th.getState());
-        
-
+        System.out.println(ElegirBaseController.pedido.writePedido());
         try {
-            InicioVentana.cambiarEscenasPedirPedidos("VentanaPago.fxml",VentanaBienvenidaController.stage1,"Ventana de pago");
+            InicioVentana.cambiarEscenasPedirPedidos("VentanaPago.fxml",VentanaBienvenidaController.stage1,"Ventana de pago");          
         } catch (IOException ex) {
            System.out.println(ex.getMessage());
         }

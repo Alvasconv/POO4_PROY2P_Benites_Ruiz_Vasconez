@@ -10,6 +10,7 @@ import Clases.incompleteStageException;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.EOFException;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -278,15 +279,22 @@ public class VentanaPagoController implements Initializable {
         lb.setText("¿Esta seguro de cancelar su compra?");
         bConfirmar.setOnMouseClicked((MouseEvent e) -> {
             eliminartxt();
-            Thread th = new Thread(() -> {
-                Platform.runLater(() -> {
-                    eliminarbin();
-                });
+            
+            Thread th = new Thread(new Runnable(){
+                @Override
+                public void run(){
+                    try{
+                        eliminarbin();
+                        System.out.println("Segundo caso: "+ElegirBaseController.pedido.writePedido());
+
+                    } catch (Exception ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                }
             });
             th.setDaemon(true);
             th.start();
 
-            ElegirBaseController.pedido = null;
             try {
                 InicioVentana.cambiarEscenasPedirPedidos("VentanaBienvenida.fxml", VentanaBienvenidaController.stage1, "Ventana Bienvenida");
             } catch (IOException ex) {
@@ -345,30 +353,19 @@ public class VentanaPagoController implements Initializable {
      * Al ser cancelado un pedido en la ventana pago, elimina su archivo serializado tipo .bin.
      */
     public void eliminarbin() {
-        ArrayList<Pedido> pediSeri = new ArrayList<>();
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(InicioVentana.pathFiles + "pedido" + ElegirBaseController.pedido.getPedido() + ".bin"))) {
-            while (true) {
-                try {
-                    Pedido p = (Pedido) ois.readObject();
-                    pediSeri.add(p);
-                } catch (EOFException ef) {
-                    // Se alcanzó el final del archivo
-                    break;
-                }
-            }
-        } catch (IOException | ClassNotFoundException fn) {
-            System.out.println(fn.getMessage());
+        try{
+            File f = new File(InicioVentana.pathFiles+ "pedido" + ElegirBaseController.pedido.getPedido() + ".bin");
+            f.delete();
+            System.out.println("ELIMINADO .BIN  ");
         }
-
-        pediSeri.remove(pediSeri.size() - 1);
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(InicioVentana.pathFiles + "pedido" + ElegirBaseController.pedido.getPedido() + ".bin"))) {
-            for (Pedido ped : pediSeri) {
-                oos.writeObject(ped);
-            }
-            System.out.println("PEDIDO ELIMINADO DE ARCHIVO BIN");
-        } catch (IOException ioe) {
-            System.out.println(ioe.getMessage());
+        catch(Exception e){
+            System.out.println(e.getMessage());
         }
-
     }
+    
+
+                
+            
+        
+    
 }

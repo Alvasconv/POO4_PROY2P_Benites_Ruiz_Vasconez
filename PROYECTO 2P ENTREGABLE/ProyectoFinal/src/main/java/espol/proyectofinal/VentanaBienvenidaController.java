@@ -8,7 +8,13 @@ import Clases.Pedido;
 import Clases.incompleteStageException;
 import static espol.proyectofinal.ElegirBaseController.pedido;
 import static espol.proyectofinal.InicioSesionController.usuario;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -37,11 +43,9 @@ import javafx.stage.Stage;
  */
 public class VentanaBienvenidaController implements Initializable {
     // utilizar este arraylist para aqui agregar los pedidos que se vayan generando; recordar que la clase pedido tiene
-    // varios constructores y cualquiera de estos puede recibir este arraylist pedidosgenerados
-    /**
-     * Utilizar este arraylist para aqui agregar los pedidos que se vayan generando.
-     */
-    public static ArrayList<Pedido> pedidosgenerados = new ArrayList<>();
+//    // varios constructores y cualquiera de estos puede recibir este arraylist pedidosgenerados
+    
+
     /**
      * ListView de los pedidos generados en el programa.
      */
@@ -49,7 +53,7 @@ public class VentanaBienvenidaController implements Initializable {
     /**
      * VBox donde se muestran los pedidos generados.
      */
-    public static VBox vpedidos = new VBox ();
+    public static VBox vpedidos;
     /**
      * Stage de la ventana emergente de los pedidos generados.
      */
@@ -69,6 +73,11 @@ public class VentanaBienvenidaController implements Initializable {
      * Stage usado para abrir la ventana de Elegir Base.
      */
     public static Stage stage1 = new Stage();
+    /**
+     * PrimaryStage usado para cerrar el Stage actual de esta ventana y dar paso a la
+     * ventana Elegir Base.
+     */
+    public static Stage primaryStage;
 
     /**
      * Initializes the controller class.
@@ -77,19 +86,12 @@ public class VentanaBienvenidaController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        lbienvenida.setText(lbienvenida.getText()+", "+usuario);
-        
-//      estos son solo ejemplos de prueba para ver si mi ventana se actualizaba constantemente
-        pedidosgenerados.add(new Pedido("Neymar"));
-        pedidosgenerados.add(new Pedido("Iron Man"));
-        pedidosgenerados.add(new Pedido("Messi"));
-        pedidosgenerados.add(new Pedido("Ronaldo"));
-        
-        
-        
-    }    
+        ElegirBaseController.pedido=null;
+        lbienvenida.setText(lbienvenida.getText()+", "+usuario);   
+    }
+    
     /**
-     * Muetra los locales
+     * Muetra los locales en el mapa.
      * @param event Tipo ActionEvent
      */
     @FXML
@@ -138,21 +140,27 @@ public class VentanaBienvenidaController implements Initializable {
                     InicioVentana.cambiarEscenasPedirPedidos("ElegirBase.fxml",VentanaBienvenidaController.stage1,"Seleccion Base");
 
                     //Cerrar la ventana principal
-                    Stage primaryStage = (Stage) btpedido.getScene().getWindow();
-                    primaryStage.close();
+                    if(((Stage) btpedido.getScene().getWindow())!=null){
+                        primaryStage = (Stage) btpedido.getScene().getWindow();
+                        primaryStage.close();
+                    }else{
+                        primaryStage = new Stage();
+                        primaryStage.close();
+                    }
+                    
                     stage1.show();
 
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
                 
-                ventanaGenerarPedidos();
-                actualizarVentanaPedidos();
+                
             }
 
         });
         
     }
+    
     
 //    -------- este metodo hace que se abra la ventana que se actualiza en vivo cuando llega un nuevo pedido -------
 //    -------- y la invoco dentro de mi metodo handle del metodo mostrar pedido de esta clase 
@@ -165,20 +173,21 @@ public class VentanaBienvenidaController implements Initializable {
         lviewPedidos.setPrefWidth(300);
         lviewPedidos.setPrefHeight(250);
         
-        ObservableList <Pedido> items = FXCollections.observableArrayList(pedidosgenerados);
+        ObservableList <Pedido> items = FXCollections.observableArrayList(Pedido.pedidosGenerados());
         lviewPedidos.setItems(items);
         lviewPedidos.setDisable(false);
+        vpedidos = new VBox ();
         vpedidos.getChildren().add(lviewPedidos);
         Pane rootNuevo = new Pane();
         rootNuevo.getChildren().addAll(vpedidos); 
       
         Scene s = new Scene(rootNuevo, 300, 250);
+        
         g.setScene(s);
         g.setTitle("Pedidos Generados");
         g.show();
     }
     
-    //public void actualizarVentanaPedidos(){
     /**
      * Metodo encargado de realizar la actualizacion de la ventana de pedidos generados.
      */
@@ -189,12 +198,11 @@ public class VentanaBienvenidaController implements Initializable {
             public void run() {
                 while (true) {
                     try {
-                        Thread.sleep(5000); 
-                        System.out.println("hola");
+                        Thread.sleep(5000);
                         Platform.runLater(() -> {                         
                             vpedidos.getChildren().clear();
-                            ventanaGenerarPedidos();                       
-                        });
+                            ventanaGenerarPedidos();
+                        });   
                     } catch (InterruptedException ex) {
                         ex.printStackTrace();
                     }

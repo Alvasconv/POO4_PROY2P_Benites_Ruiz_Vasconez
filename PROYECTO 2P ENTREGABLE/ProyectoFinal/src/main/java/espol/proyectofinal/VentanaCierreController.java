@@ -5,7 +5,6 @@
 package espol.proyectofinal;
 
 import Clases.Pedido;
-import static espol.proyectofinal.VentanaBienvenidaController.pedidosgenerados;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
@@ -27,7 +26,7 @@ import javafx.scene.layout.Pane;
 public class VentanaCierreController implements Initializable {
 
     
-    
+
     
     @FXML
     private Pane rootcierre;
@@ -59,7 +58,7 @@ public class VentanaCierreController implements Initializable {
         }catch(IOException e){
             System.out.println("error");
         }
-        for (Pedido pe:pedidosgenerados){
+        for (Pedido pe:Pedido.pedidosGenerados()){
             if (pe.getNombre().equals(InicioSesionController.usuario)){
                 lped.setText("Tu pedido es el #"+String.valueOf(pe.getPedido())+"."+" Te llamaremos cuando este listo.");
             }
@@ -67,7 +66,7 @@ public class VentanaCierreController implements Initializable {
         }
         hbllamado.getChildren().add(lped);
         iniciarTarea();
-        
+              
     }    
     /**
      * Realiza el conteo regresivo en que se cierra automaticamente la ventana.
@@ -101,7 +100,7 @@ public class VentanaCierreController implements Initializable {
             
             
         }
-        Platform.exit();
+        Platform.exit();       
     } 
     /**
      * Ejecuta el conteo regresivo.

@@ -8,6 +8,8 @@ import Clases.Base;
 import Clases.Sabor;
 import Clases.Topping;
 import Clases.Usuario;
+import static espol.proyectofinal.VentanaBienvenidaController.actualizarVentanaPedidos;
+import static espol.proyectofinal.VentanaBienvenidaController.ventanaGenerarPedidos;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -50,6 +52,8 @@ public class InicioSesionController implements Initializable {
      * Nombre del usuario que ha ingresado en el sistema.
      */
     public static String usuario = "";
+    
+    
     
     @FXML
     private TextField txusuario;
@@ -182,6 +186,8 @@ public class InicioSesionController implements Initializable {
                             } catch (IOException ex) {
                                 ex.printStackTrace();
                             }
+                            VentanaBienvenidaController.ventanaGenerarPedidos();
+                            VentanaBienvenidaController.actualizarVentanaPedidos();
 
                         }
 

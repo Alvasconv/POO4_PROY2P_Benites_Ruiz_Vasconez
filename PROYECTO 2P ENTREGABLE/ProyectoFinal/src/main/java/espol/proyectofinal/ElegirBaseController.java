@@ -63,7 +63,9 @@ public class ElegirBaseController implements Initializable {
     ArrayList<Base> bases = new ArrayList<>();
     ArrayList<ToggleButton> tgBotones = new ArrayList<>();
     Base baseSeleccionada;
-    
+    /**
+     * Pedido donde se añadiran los componentes escogidos por el usuario.
+     */
     public static Pedido pedido;
 
     /**
