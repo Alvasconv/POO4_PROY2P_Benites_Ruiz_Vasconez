@@ -10,7 +10,7 @@ import java.io.Serializable;
  *
  * @author Abeni
  */
-public class Sabor implements Serializable{
+public class Sabor implements Serializable, Comparable<Sabor>{
     private String sabor;
     private double precio;
 
@@ -55,6 +55,11 @@ public class Sabor implements Serializable{
      */
     public String mostrarDetalles() {
         return "Sabor: "+sabor;
+    }
+
+    @Override
+    public int compareTo(Sabor s) {
+        return this.sabor.compareTo(s.sabor);
     }
     
 }

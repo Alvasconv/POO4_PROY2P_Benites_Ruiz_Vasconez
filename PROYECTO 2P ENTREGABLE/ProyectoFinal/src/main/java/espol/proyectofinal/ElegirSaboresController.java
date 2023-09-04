@@ -14,6 +14,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -84,8 +85,9 @@ public class ElegirSaboresController implements Initializable {
         catch(Exception ex){
             ex.printStackTrace();
         }
-        Sabor snull = null;
+        Sabor snull = new Sabor("",0);
         sabores.add(snull);
+        Collections.sort(sabores);
         sabor1.getItems().addAll(sabores);
         sabor2.getItems().addAll(sabores);
     }
@@ -129,14 +131,22 @@ public class ElegirSaboresController implements Initializable {
     public void continuar(){
         btnContinuar.setOnAction((ActionEvent e) -> {
             
-            if (sabor1.getValue()==null && sabor2.getValue()==null){
+            if ((sabor2.getValue()==null) && sabor1.getValue()==null){
+                try{
+                        throw (new incompleteStageException());
+                    }
+                    catch(incompleteStageException iex){
+                        mensajeException.setText(iex.getMessage());
+                    }
+            }
+            else if (sabor2.getValue().getSabor().isEmpty() && sabor2.getValue().getSabor().isEmpty()){
                 try{
                     throw (new incompleteStageException());
-                }
-                catch(incompleteStageException iex){
-                    mensajeException.setText(iex.getMessage());
-                }
-            }
+                    }
+                    catch(incompleteStageException iex){
+                        mensajeException.setText(iex.getMessage());
+                    }
+            }           
             else{
                 try {
                     ArrayList<Sabor> saboresPedidos= new ArrayList<>();
