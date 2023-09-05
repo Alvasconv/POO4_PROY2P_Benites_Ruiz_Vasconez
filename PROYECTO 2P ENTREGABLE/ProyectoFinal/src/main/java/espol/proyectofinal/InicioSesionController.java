@@ -25,6 +25,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -65,6 +66,7 @@ public class InicioSesionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cargarUsuarios();
+        iniciarSesion();
         txusuario.setOnKeyTyped((KeyEvent e)->vbaviso.getChildren().clear());
         txcontrasenia.setOnKeyTyped((KeyEvent e)->vbaviso.getChildren().clear());
     }
@@ -93,18 +95,16 @@ public class InicioSesionController implements Initializable {
     /**
      * compureba que las credenciales ingresadas por el usuario sean las correctas
      * y esten guardadas en el archivo usuarios.txt.
-     * @param event tipo ActionEvent
      */
-    @FXML
-    private void inicaSesion(ActionEvent event) {
+    public void iniciarSesion(){
         
-        Usuario user = new Usuario(txusuario.getText(),txcontrasenia.getText());
-        if(lstusuarios.contains(user)){
-            btsesion.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent e) {
-
+        btsesion.setOnMouseClicked((MouseEvent e)->{
+            vbaviso.getChildren().clear();
+            boolean entro = false;
+            for(Usuario u:lstusuarios){
+                if( u.equals( new Usuario(txusuario.getText(),txcontrasenia.getText()) ) ){
                     try {
+                        usuario=u.getNombre();
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("ventanaBienvenida.fxml"));
                         Parent root = loader.load();
                         VentanaBienvenidaController controller = loader.getController();
@@ -118,23 +118,27 @@ public class InicioSesionController implements Initializable {
                             primaryStage.close();
                             stage.show();
                         }
-                    } 
-                    catch (IOException ex) {
-                        System.out.println(ex.getMessage());
+
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
                     }
                     VentanaBienvenidaController.ventanaGenerarPedidos();
                     VentanaBienvenidaController.actualizarVentanaPedidos();
+                    entro=true;
                 }
-            });
-        }
-        else{
-            Label aviso = new Label("Datos incorrectos");
-            aviso.getStyleClass().add("texto");
-            vbaviso.getChildren().add(aviso);
-            txcontrasenia.clear();
-            txusuario.clear();
-        }           
+                    
+            }
+            if(entro==false){
+                Label aviso = new Label("Datos ingresados erroneos");
+                aviso.getStyleClass().add("texto");
+                vbaviso.getChildren().add(aviso);
+                txcontrasenia.clear();
+                txusuario.clear();
+            }
+        });
+        
     }
+    
 
 
 }

@@ -52,10 +52,10 @@
             <Label layoutX="63.0" layoutY="91.0" text="I.V.A" />
             <Label layoutX="31.0" layoutY="61.0" text="Adicional tarjeta" />
             <Label layoutX="39.0" layoutY="121.0" text="Total a Pagar" />
-            <TextField fx:id="valor" layoutX="135.0" layoutY="29.0" />
-            <TextField fx:id="valortrj" layoutX="135.0" layoutY="57.0" />
-            <TextField fx:id="iva" layoutX="135.0" layoutY="87.0" />
-            <TextField fx:id="total" layoutX="135.0" layoutY="117.0" />
+            <TextField fx:id="valor" editable="false" layoutX="135.0" layoutY="29.0" />
+            <TextField fx:id="valortrj" editable="false" layoutX="135.0" layoutY="57.0" />
+            <TextField fx:id="iva" editable="false" layoutX="135.0" layoutY="87.0" />
+            <TextField fx:id="total" editable="false" layoutX="135.0" layoutY="117.0" />
          </children>
       </AnchorPane>
       <VBox fx:id="hbLabel" layoutX="77.0" layoutY="279.0" prefHeight="162.0" prefWidth="539.0" />

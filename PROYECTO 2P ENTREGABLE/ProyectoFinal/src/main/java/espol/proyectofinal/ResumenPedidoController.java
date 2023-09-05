@@ -227,7 +227,6 @@ public class ResumenPedidoController implements Initializable {
         th.setDaemon(true);
         th.start();
         
-        System.out.println(ElegirBaseController.pedido.writePedido());
         try {
             //InicioVentana.cambiarEscenasPedirPedidos("VentanaPago.fxml",VentanaBienvenidaController.stage1,"Ventana de pago");
             FXMLLoader loader = new FXMLLoader(ResumenPedidoController.class.getResource("VentanaPago.fxml"));
@@ -237,6 +236,7 @@ public class ResumenPedidoController implements Initializable {
             VentanaBienvenidaController.stage1.setTitle("Ventana Pago");
         } catch (IOException ex) {
            System.out.println(ex.getMessage());
+           ex.printStackTrace();
         }
     }
     

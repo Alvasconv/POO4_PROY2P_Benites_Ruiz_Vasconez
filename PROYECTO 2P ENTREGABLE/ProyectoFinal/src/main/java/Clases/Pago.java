@@ -39,7 +39,7 @@ public class Pago {
      * @param tipoPago tipoPago
      */
     public Pago(int idpedido, String nombreCLiente, double totalPagar,double iva,double valorTrj,double valorSinAdiciones, LocalDate fecha, String tipoPago) {
-        this.idpago = numPagos();
+        this.idpago = numPagos()+1;
         this.idpedido = idpedido;
         this.nombreCLiente = nombreCLiente;
         this.totalPagar = totalPagar;
@@ -144,20 +144,20 @@ public class Pago {
      * @return indPedidos
      */
     public static int numPagos(){
-        int indPedidos = 0;
+        int indPagos = 0;
         try(BufferedReader bfr = new BufferedReader(new FileReader(InicioVentana.pathFiles + "pagos.txt"))){
             String datos;
             while((datos=bfr.readLine())!=null){
                 String[] elementos = datos.split(",");
                 int ind = Integer.parseInt(elementos[0]);
-                if(indPedidos<=ind){
-                    indPedidos=ind;
+                if(indPagos<=ind){
+                    indPagos=ind;
                 }
             }
-        } catch (IOException ex) {
+        } catch (IOException | NumberFormatException ex) {
             System.out.println(ex.getMessage());
         }
-        return indPedidos;
+        return indPagos;
     }
     
 }

@@ -56,7 +56,7 @@
       </HBox>
       <HBox alignment="TOP_CENTER" layoutY="290.0" prefHeight="110.0" prefWidth="600.0">
          <children>
-            <Button fx:id="btsesion" mnemonicParsing="false" onAction="#inicaSesion" prefHeight="25.0" prefWidth="227.0" style="-fx-background-color: #FBD33F;" text="Inicar sesion" textFill="#1111bf">
+            <Button fx:id="btsesion" mnemonicParsing="false" prefHeight="25.0" prefWidth="227.0" style="-fx-background-color: #FBD33F;" text="Inicar sesion" textFill="#1111bf">
                <font>
                   <Font size="18.0" />
                </font>
