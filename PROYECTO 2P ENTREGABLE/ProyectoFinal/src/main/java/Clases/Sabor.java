@@ -5,6 +5,7 @@
 package Clases;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 
 /**
  *
@@ -13,6 +14,7 @@ import java.io.Serializable;
 public class Sabor implements Serializable, Comparable<Sabor>{
     private String sabor;
     private double precio;
+    DecimalFormat df = new DecimalFormat("0.00");
 
     /**
      *Constructor Sabor
@@ -46,7 +48,12 @@ public class Sabor implements Serializable, Comparable<Sabor>{
      */
     @Override
     public String toString() {
-        return sabor;
+        if(precio==0.00){
+            return "";
+        }
+        else{
+            return sabor+" - "+df.format(precio);
+        }
     }
     
     /**

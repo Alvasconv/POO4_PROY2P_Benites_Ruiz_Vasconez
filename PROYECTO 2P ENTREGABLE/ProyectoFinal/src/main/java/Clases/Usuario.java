@@ -6,6 +6,7 @@ package Clases;
 
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  *
@@ -28,6 +29,11 @@ public class Usuario {
     public Usuario(String nombre, String apellido, String usuario, String contrasenia) {
         this.nombre = nombre;
         this.apellido = apellido;
+        this.usuario = usuario;
+        this.contrasenia = contrasenia;
+    }
+    
+    public Usuario( String usuario, String contrasenia) {
         this.usuario = usuario;
         this.contrasenia = contrasenia;
     }
@@ -72,8 +78,34 @@ public class Usuario {
     public String toString() {
         return "usuario = " + usuario + ", contrasenia = " + contrasenia;
     }
-    
 
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 89 * hash + Objects.hashCode(this.usuario);
+        hash = 89 * hash + Objects.hashCode(this.contrasenia);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Usuario u = (Usuario) obj;
+        if (!Objects.equals(this.usuario, u.usuario)) {
+            return false;
+        }
+        return Objects.equals(this.contrasenia, u.contrasenia);
+    }
+    
+    
     
     
     

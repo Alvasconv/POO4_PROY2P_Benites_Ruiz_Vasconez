@@ -7,31 +7,26 @@ package espol.proyectofinal;
 import Clases.*;
 import Clases.incompleteStageException;
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 
 /**
  * FXML Controller class
  *
- * @author AngelloV
+ * @author AngelloVasconez
  */
 public class ElegirBaseController implements Initializable {
 
@@ -64,9 +59,14 @@ public class ElegirBaseController implements Initializable {
     ArrayList<ToggleButton> tgBotones = new ArrayList<>();
     Base baseSeleccionada;
     /**
+     * Costo del pedido que va mostrando al usuario el precio que posee su pedido
+     * hasta el momento dependiendo de sus elecciones.
+     */
+    public static Double costoPedido=0.00;
+    /**
      * Pedido donde se añadiran los componentes escogidos por el usuario.
      */
-    public static Pedido pedido;
+    public static Pedido pedido=null;
 
     /**
      *Initialize.
@@ -75,7 +75,6 @@ public class ElegirBaseController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
         leerDatosBase();
         for (ToggleButton tg: tgBotones){
             tg.setOnMouseClicked(tgb);
@@ -97,7 +96,7 @@ public class ElegirBaseController implements Initializable {
                 bases.add(b);
             }
         } catch(Exception e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         //texto de las bases
         base1.setText(bases.get(0).getBase());
@@ -125,9 +124,12 @@ public class ElegirBaseController implements Initializable {
                 mensajeException.setText("");
                 ToggleButton tgboton = (ToggleButton) t.getSource();
                 int indTgBoton = tgBotones.indexOf(tgboton);
+                DecimalFormat df = new DecimalFormat("0.00");
                 
                 if(tgboton.isSelected()){
-                    costoTotal.setText("Valor a pagar: "+bases.get(indTgBoton).getPrecio());
+                    costoPedido=0.00;
+                    costoPedido=costoPedido+bases.get(indTgBoton).getPrecio();
+                    costoTotal.setText("Valor a pagar: "+df.format(costoPedido));
                     baseSeleccionada = bases.get(indTgBoton);
                     for (ToggleButton tg2: tgBotones){
                         if(!tg2.equals(tgboton)){
@@ -137,7 +139,8 @@ public class ElegirBaseController implements Initializable {
                 }
                 
                 if(!tgboton.isSelected()){
-                    costoTotal.setText("Valor a pagar: 0");
+                    costoPedido=costoPedido-bases.get(indTgBoton).getPrecio();
+                    costoTotal.setText("Valor a pagar: "+df.format(costoPedido));
                     baseSeleccionada = null;  
                 }               
             }
@@ -145,7 +148,8 @@ public class ElegirBaseController implements Initializable {
     };
      
     /**
-     * Cambia de la escena actual a la de Elegir Sabores.
+     * Cambia de la escena actual a la de Elegir Sabores y añade la Base seleccionada
+     * al pedido.
      */
     public void continuar(){
         btnContinuar.setOnAction((ActionEvent e) -> {
@@ -165,7 +169,7 @@ public class ElegirBaseController implements Initializable {
                     InicioVentana.cambiarEscenasPedirPedidos("ElegirSabores.fxml",VentanaBienvenidaController.stage1,"Seleccion Sabores");
                     
                 } catch (IOException ex) {
-                    ex.printStackTrace();
+                    System.out.println(ex.getMessage());
                 }
             }
         });

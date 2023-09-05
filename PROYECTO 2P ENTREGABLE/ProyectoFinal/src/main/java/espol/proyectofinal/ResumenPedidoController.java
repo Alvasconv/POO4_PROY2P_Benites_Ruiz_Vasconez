@@ -4,10 +4,7 @@
  */
 package espol.proyectofinal;
 
-import Clases.*;
-import static espol.proyectofinal.VentanaBienvenidaController.*;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,19 +13,19 @@ import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import static javafx.scene.layout.HBox.setMargin;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -36,7 +33,7 @@ import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
- * @author vv
+ * @author AngelloVasconez
  */
 public class ResumenPedidoController implements Initializable {
 
@@ -80,7 +77,7 @@ public class ResumenPedidoController implements Initializable {
     }
     
     /**
-     * Carga los datos de cada componente ordenado en el pedido y mostrados en la
+     * Carga los datos de cada componente ordenado en el pedido y los muestra en la
      * ventana de Resumen Pedido.
      */
     public void llenar(){
@@ -94,6 +91,7 @@ public class ResumenPedidoController implements Initializable {
             vbPedido.getChildren().add(hb);
         }
     }
+    
     
     //Agrupa todos los vboxes de cada detalle del pedido
     EventHandler evvb = (EventHandler<MouseEvent>) (MouseEvent e) -> {
@@ -112,7 +110,7 @@ public class ResumenPedidoController implements Initializable {
     
     /**
      * Metodo usado a travez del boton Eliminar, reconoce si hay 1 0 2 sabores
-     * en pedido, solo si hay 2 permite al usuario eliminarlo.
+     * en el pedido, solo si hay 2 permite al usuario eliminarlo.
      */
     public void eliminar(){
         btnEliminar.setOnMouseClicked((MouseEvent e)->{
@@ -142,7 +140,7 @@ public class ResumenPedidoController implements Initializable {
     }
     
     /**
-     * Ventana de confirmacion ligado a los botones eliminar y cancelar de la ventana
+     * Ventana de confirmacion ligada a los botones eliminar y cancelar de la ventana
      * Resumen Pedido, dependiendo del caso se realizara la accion al dar click en el boton
      * confirmar de la ventana emergente.
      * @param caso Tipos de casos aceptados(eliminar Sabor / cancelar Pedido)
@@ -156,7 +154,7 @@ public class ResumenPedidoController implements Initializable {
         bConfirmar.setStyle("-fx-text-fill: black;-fx-font-weight: bold;-fx-background-color:#ECDD29");
         Button bCancelar = new Button("Cancelar");
         bCancelar.setStyle("-fx-text-fill: black;-fx-font-weight: bold;-fx-background-color:#ECDD29");
-                   
+        //Acciones que realizara el boton Confirmar dependiendo el caso   
         if(caso=="eliminar Sabor"){
             lb.setText("¿Esta seguro de eliminar el componente?");
             bConfirmar.setOnMouseClicked((MouseEvent e)->{
@@ -180,15 +178,14 @@ public class ResumenPedidoController implements Initializable {
                    System.out.println(ex.getMessage());
                 }
                 stg1.close();
-                // lo ultimo que podriamos hacer es que se cierre toda la aplicacion xd
             });   
         }
-        
+        //Accion del boton cancelar para ambos casos
         bCancelar.setOnMouseClicked((MouseEvent e)->{
             stg1.close();
         }); 
         
-       h2.getChildren().addAll(bConfirmar,bCancelar);
+        h2.getChildren().addAll(bConfirmar,bCancelar);
         h2.setAlignment(Pos.CENTER);
         h2.setSpacing(20);
         h2.setLayoutX(30);
@@ -206,7 +203,7 @@ public class ResumenPedidoController implements Initializable {
     
     /**
      * Metodo ligado al boton confirmar de la ventana Resumen Pedido, da paso a la
-     * Ventana Pago, serializa el pedido y lo escribe en el archivo pedidod.txt.
+     * Ventana Pago, serializa el pedido y lo escribe en el archivo pedidos.txt.
      */
     public void confirmarPedido(){
         try(BufferedWriter bfr = new BufferedWriter(new FileWriter(InicioVentana.pathFiles+"pedidos.txt",true))){ 
@@ -232,7 +229,12 @@ public class ResumenPedidoController implements Initializable {
         
         System.out.println(ElegirBaseController.pedido.writePedido());
         try {
-            InicioVentana.cambiarEscenasPedirPedidos("VentanaPago.fxml",VentanaBienvenidaController.stage1,"Ventana de pago");          
+            //InicioVentana.cambiarEscenasPedirPedidos("VentanaPago.fxml",VentanaBienvenidaController.stage1,"Ventana de pago");
+            FXMLLoader loader = new FXMLLoader(ResumenPedidoController.class.getResource("VentanaPago.fxml"));
+            Parent pago = loader.load();
+            Scene scene = new Scene(pago,700,520);
+            VentanaBienvenidaController.stage1.setScene(scene);
+            VentanaBienvenidaController.stage1.setTitle("Ventana Pago");
         } catch (IOException ex) {
            System.out.println(ex.getMessage());
         }

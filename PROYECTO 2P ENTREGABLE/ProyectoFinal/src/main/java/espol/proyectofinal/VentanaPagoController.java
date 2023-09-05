@@ -5,27 +5,17 @@
 package espol.proyectofinal;
 
 import Clases.Pago;
-import Clases.Pedido;
 import Clases.incompleteStageException;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.EOFException;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.URL;
-import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -48,12 +38,11 @@ import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
- * @author vv
+ * @author Julian
  */
 public class VentanaPagoController implements Initializable {
 
     Label ldetalleT = new Label("Ingrese los datos de su tarjeta");
-
     Label lnombreT = new Label();
     Label lnumeroT = new Label();
     Label lfechaT = new Label();
@@ -66,36 +55,27 @@ public class VentanaPagoController implements Initializable {
 
     @FXML
     private AnchorPane rootPago;
-
     @FXML
     private AnchorPane rootDetalles;
-
     @FXML
     private RadioButton efectivo;
-
     @FXML
     private RadioButton trjcredito;
-
     @FXML
     private TextField valor;
-
     @FXML
     private TextField iva;
-
     @FXML
     private TextField valortrj;
-
     @FXML
     private TextField total;
-
     @FXML
     private Button btnConfirmar;
-
     @FXML
     private Button btnCancelar;
-
     @FXML
     private VBox hbLabel;
+    
     /**
      * Initialize
      * @param url url
@@ -105,8 +85,10 @@ public class VentanaPagoController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         detallarPago();
     }
+    
     /**
-     * Detalla el pago generado por el pedido del cliente.
+     * Muestra todos los detalles del pago generado por el pedido del cliente e inidica que campos debe de
+     * llenar si desea pagar con Efectivo o Tarjeta.
      */
     public void detallarPago() {
         Pago p = ElegirBaseController.pedido.generarTransaccionE();
@@ -180,13 +162,13 @@ public class VentanaPagoController implements Initializable {
 
                 hbLabel.getChildren().addAll(ldetalleT, h);
                 hbLabel.setSpacing(5);
-
             }
         });
     }
+    
     /**
      * Metodo encargado de procesar el pago del pedido una vez el cliente de click
-     * en el boton confirmar.
+     * en el boton confirmar para el caso que sea en Efectivo o con Tarjeta.
      */
     @FXML
     public void confirmar() {
@@ -205,17 +187,18 @@ public class VentanaPagoController implements Initializable {
                 }
 
             } else {
-                // aqui nomas falta agregar un true despues de la cadena pedidos.txt para que la informacion nunca se borre
-                // no sabria si ponerlo o no ????
                 try (BufferedWriter br = new BufferedWriter(new FileWriter(InicioVentana.pathFiles + "pagos.txt",true))) {
                     br.write(ElegirBaseController.pedido.generarTransaccionT().writePago() + "\n");
-                } catch (IOException e) {
+                } 
+                catch (IOException e) {
                     System.out.println("FALLO ESCRITURA EN AL ARCHIVO TXT PAGOS");
                     System.out.println(e.getMessage());
                 }
+                
                 try {
                     InicioVentana.cambiarEscenasPedirPedidos("ventanaCierre.fxml", VentanaBienvenidaController.stage1, "Ventana Cierre");
-                } catch (IOException e) {
+                } 
+                catch (IOException e) {
                     System.out.println(e.getMessage());
                 }
             }
@@ -224,13 +207,16 @@ public class VentanaPagoController implements Initializable {
 
             try (BufferedWriter br = new BufferedWriter(new FileWriter(InicioVentana.pathFiles + "pagos.txt",true))) {
                 br.write(ElegirBaseController.pedido.generarTransaccionE().writePago() + "\n");
-            } catch (IOException e) {
+            } 
+            catch (IOException e) {
                 System.out.println("FALLO ESCRITURA EN AL ARCHIVO TXT PAGOS");
                 System.out.println(e.getMessage());
             }
+            
             try {
                 InicioVentana.cambiarEscenasPedirPedidos("ventanaCierre.fxml", VentanaBienvenidaController.stage1, "Ventana Cierre");
-            } catch (IOException e) {
+            } 
+            catch (IOException e) {
                 System.out.println(e.getMessage());
             }
 
@@ -240,10 +226,9 @@ public class VentanaPagoController implements Initializable {
             } catch (incompleteStageException inc) {
                 mostrarError(inc.getMessage());
             }
-
         }
-
     }
+    
     /**
      * Crea una alerta al usuario e indica que error esta cometiendo.
      * @param mensaje 
@@ -262,11 +247,6 @@ public class VentanaPagoController implements Initializable {
      */
     @FXML
     public void cancelar() {
-        /*
-        cuando se da en cancelar al momento de que aparezca esa ventana flotante y le demos en confirmar cancelacion
-        despues de que terminen de hacer la codificacion para eliminar ese pedido del archcivo txt y del archivo binario
-        pueden poner esto ; para que se cierre todo el programa "Platform.exit()"
-         */
         Stage stg1 = new Stage();
         VBox vb2 = new VBox();
         HBox h2 = new HBox();
@@ -275,19 +255,17 @@ public class VentanaPagoController implements Initializable {
         bConfirmar.setStyle("-fx-text-fill: black;-fx-font-weight: bold;-fx-background-color:#ECDD29");
         Button bCancelar = new Button("Cancelar");
         bCancelar.setStyle("-fx-text-fill: black;-fx-font-weight: bold;-fx-background-color:#ECDD29");
-
         lb.setText("¿Esta seguro de cancelar su compra?");
+        
         bConfirmar.setOnMouseClicked((MouseEvent e) -> {
             eliminartxt();
-            
             Thread th = new Thread(new Runnable(){
                 @Override
                 public void run(){
                     try{
                         eliminarbin();
-                        System.out.println("Segundo caso: "+ElegirBaseController.pedido.writePedido());
-
-                    } catch (Exception ex) {
+                    } 
+                    catch (Exception ex) {
                         System.out.println(ex.getMessage());
                     }
                 }
@@ -297,10 +275,12 @@ public class VentanaPagoController implements Initializable {
 
             try {
                 InicioVentana.cambiarEscenasPedirPedidos("VentanaBienvenida.fxml", VentanaBienvenidaController.stage1, "Ventana Bienvenida");
-            } catch (IOException ex) {
+            } 
+            catch (IOException ex) {
                 System.out.println(ex.getMessage());
             }
             stg1.close();
+            
         });
         bCancelar.setOnMouseClicked((MouseEvent e) -> {
             stg1.close();
@@ -321,6 +301,7 @@ public class VentanaPagoController implements Initializable {
         stg1.setTitle("Cancelar pedido ");
         stg1.show();
     }
+    
     /**
      * Al ser cancelado un pedido en la ventana pago, lo elimina del archivo pedidos.txt.
      */
@@ -343,7 +324,8 @@ public class VentanaPagoController implements Initializable {
                 bfr.write(linea + "\n");
             }
             System.out.println("PEDIDO ELIMINADO DE ARCHIVO TXT PEDIDOS");
-        } catch (IOException ex) {
+        } 
+        catch (IOException ex) {
             System.out.println("FALLO ESCRITURA EN AL ARCHIVO TXT PEDIDOS");
             System.out.println(ex.getMessage());
         }
@@ -356,7 +338,7 @@ public class VentanaPagoController implements Initializable {
         try{
             File f = new File(InicioVentana.pathFiles+ "pedido" + ElegirBaseController.pedido.getPedido() + ".bin");
             f.delete();
-            System.out.println("ELIMINADO .BIN  ");
+            System.out.println("Eliminado pedido"+ElegirBaseController.pedido.getPedido()+"..bin");
         }
         catch(Exception e){
             System.out.println(e.getMessage());

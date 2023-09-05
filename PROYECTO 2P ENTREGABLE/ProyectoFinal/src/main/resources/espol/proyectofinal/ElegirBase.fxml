@@ -13,7 +13,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" styleClass="fondosPedirPedido" stylesheets="@../../FolderCSS/FondosVentanas.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espol.proyectofinal.ElegirBaseController">
    <children>
-      <Button fx:id="btnContinuar" layoutX="562.0" layoutY="330.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="90.0" styleClass="botones" stylesheets="@../../FolderCSS/FondosVentanas.css" text="Continuar">
+      <Button fx:id="btnContinuar" layoutX="557.0" layoutY="344.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="90.0" styleClass="botones" stylesheets="@../../FolderCSS/FondosVentanas.css" text="Continuar">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -48,7 +48,7 @@
             <ImageView fx:id="imgBase2" fitHeight="100.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true" />
          </graphic>
       </ToggleButton>
-      <Label fx:id="mensajeException" layoutX="285.0" layoutY="349.0" />
+      <Label fx:id="mensajeException" alignment="CENTER" layoutX="226.0" layoutY="359.0" prefHeight="19.0" prefWidth="305.0" styleClass="texto" stylesheets="@../../FolderCSS/FondosVentanas.css" />
       <ToggleButton fx:id="base3" layoutX="449.0" layoutY="88.0" mnemonicParsing="false" prefHeight="150.0" prefWidth="200.0" styleClass="tgboton" stylesheets="@../../FolderCSS/FondosVentanas.css" text="helado4">
          <graphic>
             <ImageView fx:id="imgBase3" fitHeight="100.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true" />

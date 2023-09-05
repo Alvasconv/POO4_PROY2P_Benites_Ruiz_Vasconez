@@ -4,35 +4,28 @@
  */
 package espol.proyectofinal;
 
-import Clases.Pedido;
 import Clases.Sabor;
 import Clases.incompleteStageException;
-import static espol.proyectofinal.ElegirBaseController.pedido;
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
  *
- * @author AngelloV
+ * @author AngelloVasconez
  */
 public class ElegirSaboresController implements Initializable {
 
@@ -49,8 +42,10 @@ public class ElegirSaboresController implements Initializable {
     
     double costoSabor1=0;
     double costoSabor2=0;
+    double sumaTotal=0.00;
     ArrayList<Sabor> sabores= new ArrayList<>();
     ArrayList<ComboBox> cBoxes= new ArrayList<>();
+    DecimalFormat df = new DecimalFormat("0.00");
     
     /**
      *Initialize.
@@ -59,6 +54,7 @@ public class ElegirSaboresController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        costoTotal.setText("Valor a pagar: "+df.format(ElegirBaseController.costoPedido));
         cBoxes.add(sabor1);
         cBoxes.add(sabor2);
         leerDatosComboBox();
@@ -66,6 +62,7 @@ public class ElegirSaboresController implements Initializable {
         for(ComboBox cb: cBoxes) {
             cb.setOnAction(evCbox);
         }
+        
     }
     
     /**
@@ -83,13 +80,15 @@ public class ElegirSaboresController implements Initializable {
             }
         }
         catch(Exception ex){
-            ex.printStackTrace();
+            System.out.println(ex.getMessage());
         }
-        Sabor snull = new Sabor("",0);
+        Sabor snull = new Sabor("",0.00);
         sabores.add(snull);
         Collections.sort(sabores);
         sabor1.getItems().addAll(sabores);
         sabor2.getItems().addAll(sabores);
+        sabor1.setValue(snull);
+        sabor2.setValue(snull);
     }
     
     
@@ -99,39 +98,29 @@ public class ElegirSaboresController implements Initializable {
             mensajeException.setText("");
             if (event.getSource() instanceof ComboBox) {
                 ComboBox cbx = (ComboBox) event.getSource();
-                
-                try{
+
                 if(cbx.equals(cBoxes.get(0))){
                         costoSabor1 =sabor1.getValue().getPrecio();
-                    }
                 }
-                catch(Exception ex){
-                    costoSabor1 =0;
-                }
-                
-                try{
                 if(cbx.equals(cBoxes.get(1))){
                         costoSabor2 =sabor2.getValue().getPrecio();
-                    }
-                }
-                catch(Exception ex){
-                    costoSabor2 =0;
                 }
 
                 
-                double sumaTotal = costoSabor1+costoSabor2;
-                costoTotal.setText("Valor a pagar: "+sumaTotal);
+                sumaTotal = costoSabor1+costoSabor2;
+                costoTotal.setText("Valor a pagar: "+df.format(ElegirBaseController.costoPedido+sumaTotal));
             }   
         }
     };
     
     /**
-     * Cambia de la escena actual a la de Elegir Toppings.
+     * Cambia de la escena actual a la de Elegir Toppings y agrega la lista de sabores al
+     * pedido.
      */
     public void continuar(){
         btnContinuar.setOnAction((ActionEvent e) -> {
             
-            if ((sabor2.getValue()==null) && sabor1.getValue()==null){
+            if ((sabor1.getValue().getSabor().isEmpty() && sabor2.getValue().getSabor().isEmpty()) ){
                 try{
                         throw (new incompleteStageException());
                     }
@@ -139,30 +128,22 @@ public class ElegirSaboresController implements Initializable {
                         mensajeException.setText(iex.getMessage());
                     }
             }
-            else if (sabor2.getValue().getSabor().isEmpty() && sabor2.getValue().getSabor().isEmpty()){
-                try{
-                    throw (new incompleteStageException());
-                    }
-                    catch(incompleteStageException iex){
-                        mensajeException.setText(iex.getMessage());
-                    }
-            }           
             else{
                 try {
                     ArrayList<Sabor> saboresPedidos= new ArrayList<>();
-                    if(sabor1.getValue()!=null){
+                    
+                    if( !sabor1.getValue().getSabor().isEmpty()){
                         saboresPedidos.add(sabor1.getValue());
                     }
-                    if(sabor2.getValue()!=null){
+                    if(!sabor2.getValue().getSabor().isEmpty()){
                         saboresPedidos.add(sabor2.getValue());
                     }
+                    ElegirBaseController.costoPedido=ElegirBaseController.costoPedido+sumaTotal;
                     ElegirBaseController.pedido.setSabores(saboresPedidos);
-                    
-                    
                     InicioVentana.cambiarEscenasPedirPedidos("ElegirToppings.fxml",VentanaBienvenidaController.stage1,"Seleccion Toppings");   
                 } 
                 catch (IOException ex) {
-                    ex.printStackTrace();
+                    System.out.println(ex.getMessage());
                 }
             }
         });

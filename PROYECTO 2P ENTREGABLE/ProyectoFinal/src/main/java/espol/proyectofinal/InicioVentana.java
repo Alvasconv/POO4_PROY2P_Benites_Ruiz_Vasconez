@@ -25,13 +25,14 @@ public class InicioVentana extends Application{
     /**
      * Ruta de la ubicacion de los archivos tipo .txt y .bin usados en el programa.
      */
-    public static String pathFiles = "src/main/resources/Files/";
+    public static String pathFiles = "Files/";
     /**
      * Ruta de la ubicaion de las imagenes usadas en el programa.
      */
-    public static String pathPhotos = "src/main/resources/photos/";
-    
-    //Stage st = InicioSesionController.primaryStage;
+    public static String pathPhotos = "photos/";
+    /**
+     * Scene de la ventana Inicio de Sesion.
+     */
     private static Scene scene;
     
     /**
@@ -42,17 +43,13 @@ public class InicioVentana extends Application{
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader fxmLoader = new FXMLLoader(InicioVentana.class.getResource("InicioSesion.fxml"));
-
         Parent root = fxmLoader.load();
-
-        //scene = new Scene(root, 600, 400);
         scene = new Scene(root, 700, 500);
-
         stage.setScene(scene);
         stage.setTitle("Heladeria JEEZ-FROZ");
         stage.show();
-
     }
+    
     /**
      * Cambia las escenas del metodo pedir pedido.
      * @param nuevaEscena nombre del archivo
@@ -62,11 +59,11 @@ public class InicioVentana extends Application{
      */
     public static void cambiarEscenasPedirPedidos(String nuevaEscena,Stage stage,String titulo) throws IOException {
         FXMLLoader loader = new FXMLLoader(VentanaBienvenidaController.class.getResource(nuevaEscena));
-        Parent root = loader.load();            
-        //ElegirSaboresController controller = loader.getController();
+        Parent root = loader.load();
         stage.setTitle(titulo);
         stage.setScene(new Scene(root,700,520));
     }
+    
     /**
      * Metodo que permite cargar una imagen en un objeto ImageView previamente
      * creado para ser mostrado en el programa.

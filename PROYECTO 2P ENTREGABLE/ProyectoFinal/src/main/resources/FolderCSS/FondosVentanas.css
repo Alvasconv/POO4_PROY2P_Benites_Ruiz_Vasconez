@@ -104,18 +104,13 @@
     -fx-cell-size: 1.66667em; 
     -fx-font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
     -fx-font-size: 13px;
+    -fx-font-weight: 600;
 }
 
 /*Ventana Elegir Toppings*/
 .checkbox{
     -fx-font-size: 14px;
     -fx-font-weight: bold;
-
-}
-.checkbox:hover{
-
-}
-.checkbox:selected{
 
 }
 

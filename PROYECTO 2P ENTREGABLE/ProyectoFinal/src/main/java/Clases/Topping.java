@@ -5,6 +5,7 @@
 package Clases;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 
 /**
  *
@@ -13,6 +14,7 @@ import java.io.Serializable;
 public class Topping implements Serializable{
     private String topping;
     private double precio;
+    DecimalFormat df = new DecimalFormat("0.00");
 
     /**
      *
@@ -46,7 +48,7 @@ public class Topping implements Serializable{
      */
     @Override
     public String toString() {
-        return topping;
+        return topping+" - "+df.format(precio);
     }
     
     /**

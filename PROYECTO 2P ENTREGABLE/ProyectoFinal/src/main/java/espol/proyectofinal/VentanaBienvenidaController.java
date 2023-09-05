@@ -5,18 +5,9 @@
 package espol.proyectofinal;
 
 import Clases.Pedido;
-import Clases.incompleteStageException;
-import static espol.proyectofinal.ElegirBaseController.pedido;
 import static espol.proyectofinal.InicioSesionController.usuario;
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -31,7 +22,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -42,9 +32,6 @@ import javafx.stage.Stage;
  * @author Abeni
  */
 public class VentanaBienvenidaController implements Initializable {
-    // utilizar este arraylist para aqui agregar los pedidos que se vayan generando; recordar que la clase pedido tiene
-//    // varios constructores y cualquiera de estos puede recibir este arraylist pedidosgenerados
-    
 
     /**
      * ListView de los pedidos generados en el programa.
@@ -58,8 +45,6 @@ public class VentanaBienvenidaController implements Initializable {
      * Stage de la ventana emergente de los pedidos generados.
      */
     public static Stage g = new Stage();
-    //public static int idpedido =0;
-    //public static Pane rootNuevo = new Pane();
 
     @FXML
     private Pane rootBienvenida;
@@ -86,12 +71,12 @@ public class VentanaBienvenidaController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ElegirBaseController.pedido=null;
         lbienvenida.setText(lbienvenida.getText()+", "+usuario);   
     }
     
     /**
-     * Muetra los locales en el mapa.
+     * Muetra la ventana donde se le inidica al usuario la ubicacion y horario de atencion
+     * de cada uno de los locales.
      * @param event Tipo ActionEvent
      */
     @FXML
@@ -99,29 +84,19 @@ public class VentanaBienvenidaController implements Initializable {
         btlocales.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("locales.fxml"));
                     Parent root = loader.load();
-
-                    //VentanaBienvenidaController controller = loader.getController();
                     Stage stage = new Stage();
                     stage.setTitle("Ubicaciones");
                     stage.setScene(new Scene(root));
-
-                    // Cerrar la ventana principal
-                    //Stage primaryStage = (Stage) btlocales.getScene().getWindow();
-                    //primaryStage.close();
                     stage.show();
-
-                } catch (IOException ex) {
-                    ex.printStackTrace();
+                } 
+                catch (IOException ex) {
+                    System.out.println(ex.getMessage());
                 }
-
             }
-
         });
-
     }
     
     /**
@@ -134,11 +109,8 @@ public class VentanaBienvenidaController implements Initializable {
         btpedido.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                
                 try {
-
                     InicioVentana.cambiarEscenasPedirPedidos("ElegirBase.fxml",VentanaBienvenidaController.stage1,"Seleccion Base");
-
                     //Cerrar la ventana principal
                     if(((Stage) btpedido.getScene().getWindow())!=null){
                         primaryStage = (Stage) btpedido.getScene().getWindow();
@@ -147,25 +119,15 @@ public class VentanaBienvenidaController implements Initializable {
                         primaryStage = new Stage();
                         primaryStage.close();
                     }
-                    
                     stage1.show();
-
-                } catch (IOException ex) {
-                    ex.printStackTrace();
+                } 
+                catch (IOException ex) {
+                    System.out.println(ex.getMessage());
                 }
-                
-                
             }
-
-        });
-        
+        }); 
     }
     
-    
-//    -------- este metodo hace que se abra la ventana que se actualiza en vivo cuando llega un nuevo pedido -------
-//    -------- y la invoco dentro de mi metodo handle del metodo mostrar pedido de esta clase 
-    
-    //public void ventanaGenerarPedidos(){
     /**
      * Permite que se abra la ventana emergente que se actualiza en vivo cuando llega un nuevo pedido.
      */
@@ -203,13 +165,12 @@ public class VentanaBienvenidaController implements Initializable {
                             vpedidos.getChildren().clear();
                             ventanaGenerarPedidos();
                         });   
-                    } catch (InterruptedException ex) {
-                        ex.printStackTrace();
+                    } 
+                    catch (InterruptedException ex) {
+                        System.out.println(ex.getMessage());
                     }
-                }
-                
+                }   
             }
-
         });
         backgroundthread.setDaemon(true);
         backgroundthread.start();

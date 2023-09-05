@@ -9,7 +9,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" styleClass="fondosPedirPedido" stylesheets="@../../FolderCSS/FondosVentanas.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espol.proyectofinal.ElegirSaboresController">
    <children>
-      <Button fx:id="btnContinuar" layoutX="529.0" layoutY="330.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="90.0" styleClass="botones" stylesheets="@../../FolderCSS/FondosVentanas.css" text="Continuar">
+      <Button fx:id="btnContinuar" layoutX="549.0" layoutY="332.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="90.0" styleClass="botones" stylesheets="@../../FolderCSS/FondosVentanas.css" text="Continuar">
          <effect>
             <SepiaTone>
                <input>
@@ -18,10 +18,10 @@
             </SepiaTone>
          </effect></Button>
       <Label layoutX="48.0" layoutY="46.0" prefHeight="53.0" prefWidth="573.0" styleClass="tituloPedidos" text="Paso 2: Elija los sabores" />
-      <Label fx:id="costoTotal" layoutX="91.0" layoutY="347.0" prefHeight="19.0" prefWidth="156.0" styleClass="texto" stylesheets="@../../FolderCSS/FondosVentanas.css" text="Valor a pagar: " />
-      <Label fx:id="mensajeException" layoutX="205.0" layoutY="279.0" prefHeight="19.0" prefWidth="299.0" styleClass="texto" />
-      <ComboBox fx:id="sabor1" layoutX="91.0" layoutY="140.0" prefWidth="150.0" styleClass="cmbBox" stylesheets="@../../FolderCSS/FondosVentanas.css" />
-      <ComboBox fx:id="sabor2" layoutX="410.0" layoutY="140.0" prefWidth="150.0" styleClass="cmbBox" stylesheets="@../../FolderCSS/FondosVentanas.css" />
+      <Label fx:id="costoTotal" layoutX="64.0" layoutY="348.0" prefHeight="19.0" prefWidth="156.0" styleClass="texto" stylesheets="@../../FolderCSS/FondosVentanas.css" text="Valor a pagar: " />
+      <Label fx:id="mensajeException" alignment="CENTER" layoutX="220.0" layoutY="348.0" prefHeight="19.0" prefWidth="299.0" styleClass="texto" />
+      <ComboBox fx:id="sabor1" layoutX="91.0" layoutY="140.0" prefWidth="225.0" styleClass="cmbBox" stylesheets="@../../FolderCSS/FondosVentanas.css" />
+      <ComboBox fx:id="sabor2" layoutX="410.0" layoutY="140.0" prefWidth="225.0" styleClass="cmbBox" stylesheets="@../../FolderCSS/FondosVentanas.css" />
       <Label layoutX="91.0" layoutY="105.0" styleClass="texto" text="Sabor 1:" />
       <Label layoutX="415.0" layoutY="105.0" styleClass="texto" stylesheets="@../../FolderCSS/FondosVentanas.css" text="Sabor 2:" />
    </children>

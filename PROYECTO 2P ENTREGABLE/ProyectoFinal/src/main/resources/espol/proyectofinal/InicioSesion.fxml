@@ -66,6 +66,6 @@
             </Button>
          </children>
       </HBox>
-      <HBox fx:id="vbaviso" layoutX="65.0" layoutY="226.0" prefHeight="40.0" prefWidth="294.0" />
+      <HBox fx:id="vbaviso" alignment="CENTER" layoutX="187.0" layoutY="230.0" prefHeight="40.0" prefWidth="227.0" />
    </children>
 </Pane>

@@ -90,14 +90,14 @@ public class Pedido implements Serializable,Pagable {
      */
     public double calcularTotal( ){
         this.total = base.getPrecio();
-        for(Sabor s:sabores){
+            for(Sabor s:sabores){
             this.total+=s.getPrecio();
-        }
-        for(Topping t :toppings){
+            }
+            for(Topping t :toppings){
             this.total+=t.getPrecio();
         }
         return total;
-    }
+        }
 
     /**
      *getPedido
@@ -239,37 +239,7 @@ public class Pedido implements Serializable,Pagable {
         Pago p=new Pago(idpedido,n ,t,iva,adicional,valor, fechaActual ,tipo);
         return p;
     }
-
-    /**
-     * Metodo equals
-     * @param pe objeto comparado
-     * @return boolean
-     */
-    @Override
-    public boolean equals(Object pe) {
-        if (pe==null){
-            return false;
-        }
-        if (pe.getClass() != this.getClass()){
-            return false;
-        }
-        final Pedido p = (Pedido) pe;
-        return (p.pedido==this.pedido && p.nombre==this.nombre && p.total==this.total);
-    }
-
-    /**
-     * hashCode
-     * @return hash
-     */
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 79 * hash + this.pedido;
-        hash = 79 * hash + (int) (Double.doubleToLongBits(this.total) ^ (Double.doubleToLongBits(this.total) >>> 32));
-        hash = 79 * hash + Objects.hashCode(this.nombre);
-        return hash;
-    }
-    
+   
     /**
      * Devuelve el valor mas alto en los numeros de pedidos registrados en pedidos.txt.
      * @return indPedidos

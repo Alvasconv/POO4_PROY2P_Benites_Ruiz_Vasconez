@@ -4,6 +4,10 @@
  */
 package Clases;
 
+import espol.proyectofinal.InicioVentana;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -22,7 +26,6 @@ public class Pago {
     private double valorSinAdiciones;
     private LocalDate fecha;
     private String tipoPago;
-    private static int pagoNum = 1;
 
     /**
      *Constructor Pago
@@ -36,7 +39,7 @@ public class Pago {
      * @param tipoPago tipoPago
      */
     public Pago(int idpedido, String nombreCLiente, double totalPagar,double iva,double valorTrj,double valorSinAdiciones, LocalDate fecha, String tipoPago) {
-        this.idpago = pagoNum++;
+        this.idpago = numPagos();
         this.idpedido = idpedido;
         this.nombreCLiente = nombreCLiente;
         this.totalPagar = totalPagar;
@@ -136,5 +139,25 @@ public class Pago {
         return idpago + ","+ idpedido + "," + nombreCLiente + "," + totalPagar + "," + fecha + "," + tipoPago;
     }
     
+        /**
+     * Devuelve el valor mas alto en los numeros de pedidos registrados en pedidos.txt.
+     * @return indPedidos
+     */
+    public static int numPagos(){
+        int indPedidos = 0;
+        try(BufferedReader bfr = new BufferedReader(new FileReader(InicioVentana.pathFiles + "pagos.txt"))){
+            String datos;
+            while((datos=bfr.readLine())!=null){
+                String[] elementos = datos.split(",");
+                int ind = Integer.parseInt(elementos[0]);
+                if(indPedidos<=ind){
+                    indPedidos=ind;
+                }
+            }
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return indPedidos;
+    }
     
 }
