@@ -67,6 +67,7 @@ public class ElegirBaseController implements Initializable {
      * Pedido donde se añadiran los componentes escogidos por el usuario.
      */
     public static Pedido pedido=null;
+    DecimalFormat df = new DecimalFormat("0.00");
 
     /**
      *Initialize.
@@ -103,13 +104,13 @@ public class ElegirBaseController implements Initializable {
         base2.setText(bases.get(1).getBase());
         base3.setText(bases.get(2).getBase());
         //costo de las bases
-        costoBase1.setText(""+bases.get(0).getPrecio());
-        costoBase2.setText(""+bases.get(1).getPrecio());
-        costoBase3.setText(""+bases.get(2).getPrecio());
+        costoBase1.setText(df.format(bases.get(0).getPrecio()));
+        costoBase2.setText(df.format(bases.get(1).getPrecio()));
+        costoBase3.setText(df.format(bases.get(2).getPrecio()));
         //imagen de cada base
         InicioVentana.insertarImagen(imgBase1,"yogurt.jpg",90,100);
         InicioVentana.insertarImagen(imgBase2,"baseHelado.png",90,100);
-        InicioVentana.insertarImagen(imgBase3,"organico.png",90,100);
+        InicioVentana.insertarImagen(imgBase3,"vegano.png",90,100);
         //ArrayList de bases
         tgBotones.add(base1);
         tgBotones.add(base2);

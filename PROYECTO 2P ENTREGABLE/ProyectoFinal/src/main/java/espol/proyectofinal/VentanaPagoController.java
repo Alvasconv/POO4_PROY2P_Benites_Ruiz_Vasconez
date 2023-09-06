@@ -28,6 +28,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -298,7 +299,10 @@ public class VentanaPagoController implements Initializable {
         Scene sc = new Scene(vb2, 300, 200);
         stg1.initModality(Modality.APPLICATION_MODAL);
         stg1.setScene(sc);
-        stg1.setTitle("Cancelar pedido ");
+        stg1.setTitle("Cancelar pedido");
+        File f = new File(InicioVentana.pathPhotos+"alerta.png");
+        Image ix = new Image(f.toURI().toString());
+        stg1.getIcons().add(ix);
         stg1.show();
     }
     

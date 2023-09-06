@@ -6,6 +6,7 @@ package espol.proyectofinal;
 
 import Clases.Usuario;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -24,6 +25,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -109,7 +111,10 @@ public class InicioSesionController implements Initializable {
                         Parent root = loader.load();
                         VentanaBienvenidaController controller = loader.getController();
                         Stage stage = new Stage();
-                        stage.setTitle("Nueva Ventana");
+                        stage.setTitle("Ventana Bienvenida");
+                        File f = new File(InicioVentana.icon);
+                        Image ix = new Image(f.toURI().toString());
+                        stage.getIcons().add(ix);
                         stage.setScene(new Scene(root));
 
                         // Cerrar la ventana principal

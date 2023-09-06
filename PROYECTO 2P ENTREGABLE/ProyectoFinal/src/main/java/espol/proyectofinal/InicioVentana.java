@@ -4,6 +4,7 @@
  */
 package espol.proyectofinal;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import javafx.application.Application;
@@ -34,6 +35,7 @@ public class InicioVentana extends Application{
      * Scene de la ventana Inicio de Sesion.
      */
     private static Scene scene;
+    public static String icon = "photos/logo.png";
     
     /**
      *Metodo start.
@@ -47,6 +49,9 @@ public class InicioVentana extends Application{
         scene = new Scene(root, 700, 500);
         stage.setScene(scene);
         stage.setTitle("Heladeria JEEZ-FROZ");
+        File f = new File(icon);
+        Image ix = new Image(f.toURI().toString());
+        stage.getIcons().add(ix);
         stage.show();
     }
     
@@ -61,6 +66,9 @@ public class InicioVentana extends Application{
         FXMLLoader loader = new FXMLLoader(VentanaBienvenidaController.class.getResource(nuevaEscena));
         Parent root = loader.load();
         stage.setTitle(titulo);
+        File f = new File(icon);
+        Image ix = new Image(f.toURI().toString());
+        stage.getIcons().add(ix);
         stage.setScene(new Scene(root,700,520));
     }
     

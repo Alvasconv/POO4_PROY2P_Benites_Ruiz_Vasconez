@@ -31,7 +31,7 @@
       <Label fx:id="costoBase1" alignment="CENTER" layoutX="110.0" layoutY="246.0" prefHeight="31.0" prefWidth="38.0" styleClass="texto" stylesheets="@../../FolderCSS/FondosVentanas.css" text="12" />
       <Label fx:id="costoBase2" alignment="CENTER" layoutX="316.0" layoutY="246.0" prefHeight="31.0" prefWidth="48.0" styleClass="texto" stylesheets="@../../FolderCSS/FondosVentanas.css" text="20" />
       <Label fx:id="costoBase3" alignment="CENTER" contentDisplay="CENTER" layoutX="530.0" layoutY="246.0" prefHeight="31.0" prefWidth="38.0" styleClass="texto" stylesheets="@../../FolderCSS/FondosVentanas.css" text="10" />
-      <Label fx:id="costoTotal" layoutX="56.0" layoutY="358.0" prefHeight="19.0" prefWidth="190.0" styleClass="texto" stylesheets="@../../FolderCSS/FondosVentanas.css" text="Valor a pagar: ">
+      <Label fx:id="costoTotal" layoutX="56.0" layoutY="358.0" prefHeight="19.0" prefWidth="147.0" styleClass="texto" stylesheets="@../../FolderCSS/FondosVentanas.css" text="Valor a pagar: 0,00">
          <font>
             <Font size="17.0" />
          </font></Label>

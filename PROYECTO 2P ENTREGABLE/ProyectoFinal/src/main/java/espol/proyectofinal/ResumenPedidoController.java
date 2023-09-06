@@ -5,6 +5,7 @@
 package espol.proyectofinal;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -23,6 +24,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -197,7 +199,10 @@ public class ResumenPedidoController implements Initializable {
         Scene sc = new Scene(vb2,300,200);
         stg1.initModality(Modality.APPLICATION_MODAL);
         stg1.setScene(sc);
-        stg1.setTitle("Confirmar "+caso);
+        stg1.setTitle(caso);
+        File f = new File(InicioVentana.pathPhotos+"alerta.png");
+        Image ix = new Image(f.toURI().toString());
+        stg1.getIcons().add(ix);
         stg1.show();
     }
     
@@ -228,12 +233,12 @@ public class ResumenPedidoController implements Initializable {
         th.start();
         
         try {
-            //InicioVentana.cambiarEscenasPedirPedidos("VentanaPago.fxml",VentanaBienvenidaController.stage1,"Ventana de pago");
-            FXMLLoader loader = new FXMLLoader(ResumenPedidoController.class.getResource("VentanaPago.fxml"));
-            Parent pago = loader.load();
-            Scene scene = new Scene(pago,700,520);
-            VentanaBienvenidaController.stage1.setScene(scene);
-            VentanaBienvenidaController.stage1.setTitle("Ventana Pago");
+            InicioVentana.cambiarEscenasPedirPedidos("VentanaPago.fxml",VentanaBienvenidaController.stage1,"Ventana de pago");
+//            FXMLLoader loader = new FXMLLoader(ResumenPedidoController.class.getResource("VentanaPago.fxml"));
+//            Parent pago = loader.load();
+//            Scene scene = new Scene(pago,700,520);
+//            VentanaBienvenidaController.stage1.setScene(scene);
+//            VentanaBienvenidaController.stage1.setTitle("Ventana Pago");
         } catch (IOException ex) {
            System.out.println(ex.getMessage());
            ex.printStackTrace();

@@ -6,6 +6,8 @@ package espol.proyectofinal;
 
 import Clases.Pedido;
 import static espol.proyectofinal.InicioSesionController.usuario;
+import static espol.proyectofinal.InicioVentana.icon;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,6 +24,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -90,6 +93,9 @@ public class VentanaBienvenidaController implements Initializable {
                     Stage stage = new Stage();
                     stage.setTitle("Ubicaciones");
                     stage.setScene(new Scene(root));
+                    File f = new File(InicioVentana.icon);
+                    Image ix = new Image(f.toURI().toString());
+                    stage.getIcons().add(ix);
                     stage.show();
                 } 
                 catch (IOException ex) {
